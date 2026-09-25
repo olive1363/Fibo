@@ -5,7 +5,7 @@ import yfinance as yf
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 DATA.mkdir(exist_ok=True)
-SYMBOLS = {"MSTR":"MSTR", "AAPL":"AAPL", "GLD":"GLD", "SP500":"^GSPC"}
+SYMBOLS = {"MSTR":"MSTR", "AAPL":"AAPL", "TSLA":"TSLA", "GLD":"GLD", "SP500":"^GSPC"}
 
 def rows_from_df(df):
     if df is None or df.empty:
