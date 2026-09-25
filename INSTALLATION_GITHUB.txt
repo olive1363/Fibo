@@ -1,0 +1,9 @@
+FiboSwanny v49 - donnees MSTR/AAPL/GLD/SP500
+
+1. Copiez TOUT le contenu de ce dossier a la racine de votre depot GitHub Pages (pas seulement index.html).
+2. Dans GitHub > Actions, ouvrez "Update market data" puis Run workflow une premiere fois.
+3. Le workflow cree data/MSTR_1h.json, MSTR_1d.json, AAPL_..., GLD_..., SP500_...
+4. Ensuite il se relance automatiquement chaque heure.
+5. Le site charge ces fichiers locaux en priorite, donc pas de blocage CORS dans Safari/Chrome.
+
+Si la branche principale n'est ni main ni master, ajoutez son nom dans le bloc push du workflow.

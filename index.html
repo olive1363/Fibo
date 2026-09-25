@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<title>FiboSwanny · BTC / ETH · v41</title>
+<title>FiboSwanny · Marchés · v49</title>
 <style>
 :root{--bg:#071421;--panel:#0d2133;--border:#29445d;--text:#eaf2f8;--muted:#9db2c6;--accent:#ff9818;--greenbg:#a9d9aa}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}.wrap{max-width:1600px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.asset-icon{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent);font-weight:900;font-size:24px}.title{font-size:25px;font-weight:850}.sub{color:var(--muted);font-size:13px}.btn{border:1px solid var(--border);background:#10263b;color:var(--text);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none}.btn.primary{background:var(--accent);color:#111;border-color:var(--accent)}.simbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.simbar label{font-size:12px;font-weight:800;color:var(--muted)}.simbar input[type=date]{background:#10263b;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:9px 10px;font:inherit;color-scheme:dark}.simstate{font-size:12px;color:#ffd59b;font-weight:800}.settings-status{font-size:12px;color:#b9ccdb;font-weight:700}.hidden-file{display:none}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.tab{border:1px solid var(--border);background:#10263b;color:var(--text);padding:10px 16px;border-radius:10px;font-weight:800;cursor:pointer}.tab.active{background:var(--accent);color:#111;border-color:var(--accent)}.grid{display:block}.panel{display:none}.panel.active{display:block}.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px}.head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}.kicker{display:inline-block;background:#5b2f00;color:#ffd59b;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.04em}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{background:#d6f0d5;color:#17391d;border:1px solid #78ad7b;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}.fib-controls{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}.fib-controls label{display:flex;align-items:center;gap:8px;background:#10263b;border:1px solid var(--border);border-radius:10px;padding:8px 10px;color:var(--text);font-size:12px;font-weight:700}.fib-controls input{accent-color:var(--accent)}.chartwrap{position:relative;border:1px solid #6d9d70;background:var(--greenbg);overflow:hidden;border-radius:8px}.chart{display:block;width:100%;min-height:610px;touch-action:none;cursor:grab}.chart.dragging{cursor:grabbing}.axis-help{margin:8px 0 0;color:var(--muted);font-size:12px}.tip{display:none;position:absolute;z-index:5;pointer-events:none;min-width:235px;background:#effbef;color:#142b17;border:1px solid #527a56;border-radius:8px;padding:10px;font-size:12px;line-height:1.45;box-shadow:0 8px 28px #1b3d1f33}.status{margin-top:9px;color:#b9ccdb;font-size:12px}.legend{margin-top:10px;font-size:12px;color:#b9ccdb}.thresholds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}.threshold{background:#122a40;border:1px solid var(--border);border-radius:10px;padding:10px}.threshold b{display:block;font-size:12px;color:#fff}.threshold span{font-size:12px;color:var(--muted)}@media(max-width:760px){
@@ -29,36 +29,57 @@
 <body>
 <div class="wrap">
   <div class="top">
-    <div class="brand"><div class="asset-icon" id="assetIcon">₿</div><div><div class="title" id="appTitle">FiboSwanny · BTC · v41</div><div class="sub" id="appSub">4 horizons · Fibonacci + Mood RSI · 100% ancré au changement de zone · 0% sur l’extrême de zone</div></div></div>
+    <div class="brand"><div class="asset-icon" id="assetIcon">₿</div><div><div class="title" id="appTitle">FiboSwanny · BTC · v49</div><div class="sub" id="appSub">4 horizons · Fibonacci + Mood RSI · 100% ancré au changement de zone · 0% sur l’extrême de zone</div></div></div>
     <div class="simbar"><label for="simDate">Retour dans le temps</label><input id="simDate" type="date"><button class="btn" id="applySim">Afficher à cette date</button><button class="btn" id="simToday">Aujourd’hui</button><span class="simstate" id="simState">Mode actuel</span><button class="btn primary" id="refreshAll">↻ Actualiser les graphes</button><button class="btn" id="exportSettings">⇩ Exporter réglages</button><button class="btn" id="importSettings">⇧ Importer réglages</button><input class="hidden-file" id="settingsFile" type="file" accept="application/json,.json"><span class="settings-status" id="settingsStatus">Réglages mémorisés localement</span><a class="btn" id="tradingLink" href="https://fr.tradingview.com/chart/LaSKuG13/" target="_blank" rel="noopener">TradingView ↗</a></div>
   </div>
-  <div class="tabs" id="assetTabs"><button class="tab active" data-asset="BTC">BTC</button><button class="tab" data-asset="ETH">ETH</button></div><div class="tabs" id="tabs"><button class="tab active" data-tab="4h">4H</button><button class="tab" data-tab="1d">1D</button><button class="tab" data-tab="1w">1W</button><button class="tab" data-tab="1m">1M</button></div><div id="graphs" class="grid"></div>
+  <div class="tabs" id="assetTabs"><button class="tab active" data-asset="BTC">BTC</button><button class="tab" data-asset="ETH">ETH</button><button class="tab" data-asset="MSTR">MSTR</button><button class="tab" data-asset="AAPL">AAPL</button><button class="tab" data-asset="GLD">GLD</button><button class="tab" data-asset="SP500">S&amp;P 500</button></div><div class="tabs" id="tabs"><button class="tab" data-tab="1h">1H</button><button class="tab active" data-tab="4h">4H</button><button class="tab" data-tab="1d">1D</button><button class="tab" data-tab="1w">1W</button><button class="tab" data-tab="1m">1M</button></div><div id="graphs" class="grid"></div>
 </div>
 <script>
 (()=>{
 const NS='http://www.w3.org/2000/svg',DAY=86400000;
 const BTC_CFG={
+'1h':{label:'1H',market:'BTC / Dollar · 1H',rsi:[80.06,63.14,39.05,24.92],midRsi:50.00,levels:[],primaryTarget:null},
 '4h':{label:'4H',market:'BTC / Dollar · 4H',rsi:[85.43,63.05,40.35,22.86],levels:[{p:'target',v:93819.49,target:true},{p:'1,272',v:98968.99,target:true},{p:'1,414',v:101657.33,target:true},{p:'0,00%',v:87397},{p:'38,20%',v:83706,n:'shallow fib'},{p:'61,80%',v:81425.75},{p:'100,00%',v:77734.78},{p:'127,20%',v:75106.66},{p:'141,40%',v:73734.62},{p:'200,00%',v:68072.56},{p:'300,00%',v:58410.34}],primaryTarget:93819.49},
 '1d':{label:'1D',market:'BTC / Dollar · 1D',rsi:[80.61,57.64,39.40,24.83],levels:[{p:'2,000',v:109179.28,target:true},{p:'1,414',v:99322.42,target:true},{p:'1,272',v:96939.90,target:true},{p:'1,000',v:92365.70,target:true},{p:'0,00%',v:87397},{p:'38,20%',v:78882.14,n:'shallow fib'},{p:'61,80%',v:73621.65},{p:'100,00%',v:65106.79},{p:'127,20%',v:59043.85},{p:'141,40%',v:55878.64},{p:'200,00%',v:42816.58}],primaryTarget:92365.70},
 '1w':{label:'1W',market:'BTC / Dollar · 1W · Coinbase',rsi:[82.78,58.29,40.60,23.96],levels:[{p:'target',v:113898.45,target:true},{p:'0,00%',v:87397},{p:'38,20%',v:80453.07,n:'shallow fib'},{p:'61,80%',v:76163.11},{p:'100,00%',v:69219.18},{p:'141,40%',v:61693.56},{p:'200,00%',v:51041.36}],primaryTarget:113898.45},
 '1m':{label:'1M',market:'BTC / Dollar · 1M · INDEX',rsi:[96.95,61.95,42.69,19.02],levels:[{p:'0,00%',v:58051.07},{p:'38,20%',v:73278.36,n:'shallow fib'},{p:'61,80%',v:82685.79},{p:'100,00%',v:97913.08},{p:'127,20%',v:108755.55},{p:'141,40%',v:114415.95},{p:'200,00%',v:137775.09}],primaryTarget:null}
 };
 const ETH_CFG={
+'1h':{label:'1H',market:'ETH / Dollar · 1H',rsi:[85.43,63.05,40.35,22.86],levels:[],primaryTarget:null},
 '4h':{label:'4H',market:'ETH / Dollar · 4H',rsi:[85.43,63.05,40.35,22.86],levels:[],primaryTarget:null},
 '1d':{label:'1D',market:'ETH / Dollar · 1D',rsi:[80.61,57.64,39.40,24.83],levels:[],primaryTarget:null},
 '1w':{label:'1W',market:'ETH / Dollar · 1W · Coinbase',rsi:[82.78,58.29,40.60,23.96],levels:[],primaryTarget:null},
 '1m':{label:'1M',market:'ETH / Dollar · 1M · INDEX',rsi:[96.95,61.95,42.69,19.02],levels:[],primaryTarget:null}
 };
-const ASSETS={BTC:{coinbase:'BTC-USD',fsym:'BTC',binance:'BTCUSDT',icon:'₿'},ETH:{coinbase:'ETH-USD',fsym:'ETH',binance:'ETHUSDT',icon:'Ξ'}};
-const CFG_BY_ASSET={BTC:BTC_CFG,ETH:ETH_CFG};
+function marketCfg(name){return {
+'1h':{label:'1H',market:`${name} · 1H`,rsi:[85.43,63.05,40.35,22.86],levels:[],primaryTarget:null},
+'4h':{label:'4H',market:`${name} · 4H`,rsi:[85.43,63.05,40.35,22.86],levels:[],primaryTarget:null},
+'1d':{label:'1D',market:`${name} · 1D`,rsi:[80.61,57.64,39.40,24.83],levels:[],primaryTarget:null},
+'1w':{label:'1W',market:`${name} · 1W`,rsi:[82.78,58.29,40.60,23.96],levels:[],primaryTarget:null},
+'1m':{label:'1M',market:`${name} · 1M`,rsi:[96.95,61.95,42.69,19.02],levels:[],primaryTarget:null}
+}}
+const MSTR_CFG=marketCfg('MicroStrategy (MSTR)');
+const AAPL_CFG=marketCfg('Apple (AAPL)');
+const GLD_CFG=marketCfg('SPDR Gold Shares (GLD)');
+const SP500_CFG=marketCfg('S&P 500 (^GSPC)');
+SP500_CFG['1d']={...SP500_CFG['1d'],rsi:[88.11,64.24,44.25,22.32],midRsi:53.59};
+const ASSETS={
+ BTC:{kind:'crypto',coinbase:'BTC-USD',fsym:'BTC',binance:'BTCUSDT',icon:'₿',unit:'$',tv:'https://fr.tradingview.com/chart/LaSKuG13/'},
+ ETH:{kind:'crypto',coinbase:'ETH-USD',fsym:'ETH',binance:'ETHUSDT',icon:'Ξ',unit:'$',tv:'https://www.tradingview.com/chart/?symbol=COINBASE%3AETHUSD'},
+ MSTR:{kind:'market',yahoo:'MSTR',icon:'M',unit:'$',tv:'https://www.tradingview.com/chart/?symbol=NASDAQ%3AMSTR'},
+ AAPL:{kind:'market',yahoo:'AAPL',icon:'A',unit:'$',tv:'https://www.tradingview.com/chart/?symbol=NASDAQ%3AAAPL'},
+ GLD:{kind:'market',yahoo:'GLD',icon:'G',unit:'$',tv:'https://www.tradingview.com/chart/?symbol=AMEX%3AGLD'},
+ SP500:{kind:'market',yahoo:'^GSPC',icon:'S',unit:' pts',tv:'https://www.tradingview.com/chart/?symbol=SP%3ASPX'}
+};
+const CFG_BY_ASSET={BTC:BTC_CFG,ETH:ETH_CFG,MSTR:MSTR_CFG,AAPL:AAPL_CFG,GLD:GLD_CFG,SP500:SP500_CFG};
 const MOBILE_LAYOUT=window.matchMedia('(max-width:760px)').matches||/iPhone|iPod|CriOS/i.test(navigator.userAgent);
 let activeAsset='BTC',CFG=CFG_BY_ASSET[activeAsset],activeTf='4h';
-const stateStore={BTC:{},ETH:{}};
+const stateStore={BTC:{},ETH:{},MSTR:{},AAPL:{},GLD:{},SP500:{}};
 let state=stateStore[activeAsset];
 let simulationCutoff=null;
 const USER_SETTINGS_KEY='fiboswanny_user_settings_v1';
-function serializableSettings(){const out={schema:1,savedAt:new Date().toISOString(),assets:{}};for(const asset of Object.keys(stateStore)){out.assets[asset]={};for(const tf of Object.keys(CFG_BY_ASSET[asset])){const st=stateStore[asset][tf]||{};out.assets[asset][tf]={disabledChanges:[...(st.disabledChanges instanceof Set?st.disabledChanges:new Set(st.disabledChanges||[]))],targets:[...(st.targets instanceof Set?st.targets:new Set(st.targets||[]))],manualFibZones:[...(st.manualFibZones instanceof Set?st.manualFibZones:new Set(st.manualFibZones||[]))],display:{last1:st.display?.last1!==false,last2:!!st.display?.last2}}}}return out}
-function applySettingsObject(obj){if(!obj||typeof obj!=='object')throw Error('Fichier de réglages invalide');const assets=obj.assets||obj;for(const asset of Object.keys(CFG_BY_ASSET)){const src=assets?.[asset];if(!src)continue;for(const tf of Object.keys(CFG_BY_ASSET[asset])){const s=src?.[tf];if(!s)continue;const dst=stateStore[asset][tf]||(stateStore[asset][tf]={});if(Array.isArray(s.disabledChanges))dst.disabledChanges=new Set(s.disabledChanges.map(Number).filter(Number.isFinite));if(Array.isArray(s.targets))dst.targets=new Set(s.targets.map(String));if(Array.isArray(s.manualFibZones))dst.manualFibZones=new Set(s.manualFibZones.map(String));if(s.display&&typeof s.display==='object')dst.display={...(dst.display||{current:true,previous:true}),last1:s.display.last1!==false,last2:!!s.display.last2};}}
+function serializableSettings(){const out={schema:2,savedAt:new Date().toISOString(),assets:{}};for(const asset of Object.keys(stateStore)){out.assets[asset]={};for(const tf of Object.keys(CFG_BY_ASSET[asset])){const st=stateStore[asset][tf]||{};const disabled=[...(st.disabledChanges instanceof Set?st.disabledChanges:new Set(st.disabledChanges||[]))],targets=[...(st.targets instanceof Set?st.targets:new Set(st.targets||[]))],fibZones=[...(st.manualFibZones instanceof Set?st.manualFibZones:new Set(st.manualFibZones||[]))];out.assets[asset][tf]={disabledZones:disabled,targets,selectedFibZones:fibZones,display:{last1:st.display?.last1!==false,last2:!!st.display?.last2}}}}return out}
+function applySettingsObject(obj){if(!obj||typeof obj!=='object')throw Error('Fichier de réglages invalide');const assets=obj.assets||obj;for(const asset of Object.keys(CFG_BY_ASSET)){const src=assets?.[asset];if(!src)continue;for(const tf of Object.keys(CFG_BY_ASSET[asset])){const s=src?.[tf];if(!s)continue;const dst=stateStore[asset][tf]||(stateStore[asset][tf]={});const disabled=Array.isArray(s.disabledZones)?s.disabledZones:s.disabledChanges;const fibZones=Array.isArray(s.selectedFibZones)?s.selectedFibZones:s.manualFibZones;if(Array.isArray(disabled))dst.disabledChanges=new Set(disabled.map(Number).filter(Number.isFinite));if(Array.isArray(s.targets))dst.targets=new Set(s.targets.map(String));if(Array.isArray(fibZones))dst.manualFibZones=new Set(fibZones.map(String));if(s.display&&typeof s.display==='object')dst.display={...(dst.display||{current:true,previous:true}),last1:s.display.last1!==false,last2:!!s.display.last2};}}
 }
 function saveUserSettings(show=false){try{localStorage.setItem(USER_SETTINGS_KEY,JSON.stringify(serializableSettings()));if(show){const e=document.getElementById('settingsStatus');if(e)e.textContent='Réglages sauvegardés';}}catch(e){const x=document.getElementById('settingsStatus');if(x)x.textContent='Sauvegarde locale indisponible';}}
 function loadUserSettings(){try{const raw=localStorage.getItem(USER_SETTINGS_KEY);if(raw)applySettingsObject(JSON.parse(raw));}catch(e){}}
@@ -67,14 +88,14 @@ function parseSimulationDate(v){if(!v)return null;const m=/^(\d{4})-(\d{2})-(\d{
 function simulationRows(tf){const all=state[tf]?.rows||[];return simulationCutoff==null?all:all.filter(r=>r.ms<=simulationCutoff)}
 function simulationLabel(){return simulationCutoff==null?'Mode actuel':'Simulation au '+new Date(simulationCutoff).toLocaleDateString('fr-FR')}
 
-function money(v){return Number.isFinite(+v)?Math.round(+v).toLocaleString('fr-FR')+' $':'—'}
+function money(v){if(!Number.isFinite(+v))return '—';const unit=ASSETS[activeAsset]?.unit||'$';const n=Math.abs(+v)<1000?(Math.round(+v*100)/100).toLocaleString('fr-FR',{maximumFractionDigits:2}):Math.round(+v).toLocaleString('fr-FR');return unit===' pts'?n+' pts':n+' $'}
 function el(n,a={}){const z=document.createElementNS(NS,n);Object.entries(a).forEach(([k,v])=>v!=null&&z.setAttribute(k,v));return z}
-function panel(tf,c){return `<section class="panel" id="panel-${tf}"><div class="head"><div><span class="kicker">FIBOSWANNY · ${c.label} · v41</span><h2 style="margin:10px 0 4px">${c.market}</h2><div class="sub">Fibonacci : 100% au changement · 0% à l’extrême de zone + Mood RSI ${c.label}</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-reset="${tf}">⟲ Réinitialiser</button><button class="btn mobile-zoom" data-zoom-out="${tf}" aria-label="Dézoomer le temps">− Temps</button><button class="btn mobile-zoom" data-zoom-in="${tf}" aria-label="Zoomer le temps">+ Temps</button><button class="btn" data-refresh="${tf}">↻ Actualiser</button></div></div><div class="chips"><span class="chip" id="sh-${tf}">Shallow Fib : —</span><span class="chip" id="zn-${tf}">Zone : —</span><span class="chip" id="rs-${tf}">RSI 13 : —</span><span class="chip" id="tg-${tf}">Target : —</span><span class="chip" id="px-${tf}">Prix actuel : —</span></div><div class="fib-controls"><label><input type="checkbox" data-zone-filter="last1" data-tf="${tf}" checked> Limiter au 1 dernier changement de zone</label><label><input type="checkbox" data-zone-filter="last2" data-tf="${tf}"> Limiter aux 2 derniers changements de zone</label></div><div class="chartwrap"><svg class="chart" id="svg-${tf}" viewBox="0 0 1500 860"></svg><div class="tip" id="tip-${tf}"></div></div><div class="axis-help">Maintenir le clic dans le graphe : déplacer gauche/droite et haut/bas · axe du bas : temps uniquement · axe de droite : prix uniquement · molette : zoom · double-clic : réinitialiser · dates colorées = changements de zone · axe du temps prolongé + historique 4H ~1 an · iPhone : ouverture 4H sur 10 bougies · clic-glisser dans le graphe = déplacement 2D · clic zone RSI = ajouter/retirer Fibonacci · clic ligne Fibonacci = ajouter/retirer Target · clic barre = neutraliser/réactiver toute la zone · date de simulation = aucune donnée future utilisée · Targets, zones neutralisées et Fibo manuels sauvegardés automatiquement</div><div class="status" id="st-${tf}">Chargement…</div><div class="thresholds"><div class="threshold"><b>Max Bull</b><span>${c.rsi[0].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Seuil Bull</b><span>${c.rsi[1].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Seuil Bear</b><span>${c.rsi[2].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Min Bear</b><span>${c.rsi[3].toFixed(2).replace('.',',')}</span></div></div></section>`}
+function panel(tf,c){return `<section class="panel" id="panel-${tf}"><div class="head"><div><span class="kicker">FIBOSWANNY · ${c.label} · v49</span><h2 style="margin:10px 0 4px">${c.market}</h2><div class="sub">Fibonacci : 100% au changement · 0% à l’extrême de zone + Mood RSI ${c.label}</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-reset="${tf}">⟲ Réinitialiser</button><button class="btn mobile-zoom" data-zoom-out="${tf}" aria-label="Dézoomer le temps">− Temps</button><button class="btn mobile-zoom" data-zoom-in="${tf}" aria-label="Zoomer le temps">+ Temps</button><button class="btn" data-refresh="${tf}">↻ Actualiser</button></div></div><div class="chips"><span class="chip" id="sh-${tf}">Shallow Fib : —</span><span class="chip" id="zn-${tf}">Zone : —</span><span class="chip" id="rs-${tf}">RSI 13 : —</span><span class="chip" id="tg-${tf}">Target : —</span><span class="chip" id="px-${tf}">Prix actuel : —</span></div><div class="fib-controls"><label><input type="checkbox" data-zone-filter="last1" data-tf="${tf}" checked> Limiter au 1 dernier changement de zone</label><label><input type="checkbox" data-zone-filter="last2" data-tf="${tf}"> Limiter aux 2 derniers changements de zone</label></div><div class="chartwrap"><svg class="chart" id="svg-${tf}" viewBox="0 0 1500 860"></svg><div class="tip" id="tip-${tf}"></div></div><div class="axis-help">Maintenir le clic dans le graphe : déplacer gauche/droite et haut/bas · axe du bas : temps uniquement · axe de droite : prix uniquement · molette : zoom · double-clic : réinitialiser · dates colorées = changements de zone · axe du temps prolongé + historique 1H/4H · iPhone : ouverture 4H sur 20 bougies · clic-glisser dans le graphe = déplacement 2D · clic zone RSI = ajouter/retirer Fibonacci · clic ligne Fibonacci = ajouter/retirer Target · clic barre = neutraliser/réactiver toute la zone · date de simulation = aucune donnée future utilisée · Targets, zones neutralisées et zones Fibonacci sélectionnées sauvegardées automatiquement</div><div class="status" id="st-${tf}">Chargement…</div><div class="thresholds"><div class="threshold"><b>Max Bull</b><span>${c.rsi[0].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Seuil Bull</b><span>${c.rsi[1].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Seuil Bear</b><span>${c.rsi[2].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Min Bear</b><span>${c.rsi[3].toFixed(2).replace('.',',')}</span></div></div></section>`}
 const tabs=document.querySelectorAll('[data-tab]'),assetTabs=document.querySelectorAll('[data-asset]');
 function renderPanels(){document.getElementById('graphs').innerHTML=Object.entries(CFG).map(([tf,c])=>panel(tf,c)).join('');bindPanelControls();showTab(activeTf)}
 function showTab(tf){activeTf=tf;tabs.forEach(b=>b.classList.toggle('active',b.dataset.tab===tf));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+tf));}
 tabs.forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
-function updateAssetHeader(){document.getElementById('assetIcon').textContent=ASSETS[activeAsset].icon;document.getElementById('appTitle').textContent=`FiboSwanny · ${activeAsset} · v41`;document.getElementById('appSub').textContent=`${activeAsset} · 4 horizons · iPhone optimisé · Fibonacci + Mood RSI · 100% au changement · 0% à l’extrême de zone`;assetTabs.forEach(b=>b.classList.toggle('active',b.dataset.asset===activeAsset));const a=document.getElementById('tradingLink');if(a)a.href=activeAsset==='BTC'?'https://fr.tradingview.com/chart/LaSKuG13/':'https://www.tradingview.com/chart/?symbol=COINBASE%3AETHUSD'}
+function updateAssetHeader(){document.getElementById('assetIcon').textContent=ASSETS[activeAsset].icon;document.getElementById('appTitle').textContent=`FiboSwanny · ${activeAsset==='SP500'?'S&P 500':activeAsset} · v49`;document.getElementById('appSub').textContent=`${activeAsset==='SP500'?'S&P 500':activeAsset} · 5 horizons · iPhone optimisé · Fibonacci + Mood RSI · 100% au changement · 0% à l’extrême de zone`;assetTabs.forEach(b=>b.classList.toggle('active',b.dataset.asset===activeAsset));const a=document.getElementById('tradingLink');if(a)a.href=ASSETS[activeAsset].tv}
 async function switchAsset(asset){if(!CFG_BY_ASSET[asset]||asset===activeAsset)return;activeAsset=asset;CFG=CFG_BY_ASSET[asset];state=stateStore[asset];updateAssetHeader();renderPanels();await refreshAll()}
 assetTabs.forEach(b=>b.addEventListener('click',()=>switchAsset(b.dataset.asset)));
 updateAssetHeader();
@@ -88,20 +109,22 @@ async function getJSON(url){
   }finally{clearTimeout(t)}
 }
 async function getProviderJSON(url){
-  let last;
-  const urls=[
-    url,
-    'https://corsproxy.io/?'+encodeURIComponent(url),
-    'https://api.allorigins.win/raw?url='+encodeURIComponent(url)
+  let last, errors=[];
+  const candidates=[
+    {name:'direct',url},
+    {name:'isomorphic-git',url:'https://cors.isomorphic-git.org/'+url},
+    {name:'allorigins',url:'https://api.allorigins.win/raw?url='+encodeURIComponent(url)},
+    {name:'codetabs',url:'https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(url)},
+    {name:'corsproxy.io',url:'https://corsproxy.io/?'+encodeURIComponent(url)}
   ];
-  for(const u of urls){
-    try{return await getJSON(u)}catch(e){last=e}
+  for(const c of candidates){
+    try{return await getJSON(c.url)}catch(e){last=e;errors.push(c.name+': '+(e.message||e))}
   }
-  throw last||Error('Source indisponible');
+  throw Error(errors.join(' | ')||last?.message||'Source indisponible');
 }
 function normalizeRows(a){return a.filter(r=>r&&Number.isFinite(+r.close)&&+r.close>0).sort((x,y)=>x.ms-y.ms)}
-function cacheSave(key,rows,source){try{localStorage.setItem('fiboswanny_v41_'+activeAsset.toLowerCase()+'_'+key,JSON.stringify({saved:Date.now(),source,rows:rows.slice(-2600)}))}catch(e){}}
-function cacheLoad(key){try{const x=JSON.parse(localStorage.getItem('fiboswanny_v41_'+activeAsset.toLowerCase()+'_'+key)||'null');if(x&&Array.isArray(x.rows)&&x.rows.length>=20)return {rows:normalizeRows(x.rows),source:(x.source||'cache local')+' · cache local'}}catch(e){}return null}
+function cacheSave(key,rows,source){try{localStorage.setItem('fiboswanny_v49_'+activeAsset.toLowerCase()+'_'+key,JSON.stringify({saved:Date.now(),source,rows:rows.slice(-2600)}))}catch(e){}}
+function cacheLoad(key){try{const x=JSON.parse(localStorage.getItem('fiboswanny_v49_'+activeAsset.toLowerCase()+'_'+key)||'null');if(x&&Array.isArray(x.rows)&&x.rows.length>=20)return {rows:normalizeRows(x.rows),source:(x.source||'cache local')+' · cache local'}}catch(e){}return null}
 function aggregate4hFrom1h(data){
   const m=new Map();
   for(const r of data){
@@ -112,7 +135,94 @@ function aggregate4hFrom1h(data){
   }
   return [...m.values()].sort((a,b)=>a.ms-b.ms)
 }
-async function coinbaseHourly(){
+
+function yahooRows(j){
+  const r=j?.chart?.result?.[0],ts=r?.timestamp,q=r?.indicators?.quote?.[0];
+  if(!Array.isArray(ts)||!q)throw Error(j?.chart?.error?.description||'Yahoo Finance : réponse invalide');
+  const out=[];
+  for(let i=0;i<ts.length;i++){
+    const open=+q.open?.[i],high=+q.high?.[i],low=+q.low?.[i],close=+q.close?.[i],volume=+(q.volume?.[i]||0);
+    if([open,high,low,close].every(Number.isFinite)&&close>0)out.push({ms:+ts[i]*1000,open,high,low,close,volume});
+  }
+  return normalizeRows(out);
+}
+function yahooSparkRows(j,symbol){
+  const block=j?.spark?.result?.find?.(x=>x.symbol===symbol)||j?.spark?.result?.[0],resp=block?.response?.[0],ts=resp?.timestamp,q=resp?.indicators?.quote?.[0];
+  if(!Array.isArray(ts)||!q)throw Error('Yahoo Spark : réponse invalide');
+  const out=[];
+  for(let i=0;i<ts.length;i++){
+    const open=+q.open?.[i],high=+q.high?.[i],low=+q.low?.[i],close=+q.close?.[i],volume=+(q.volume?.[i]||0);
+    if([open,high,low,close].every(Number.isFinite)&&close>0)out.push({ms:+ts[i]*1000,open,high,low,close,volume});
+  }
+  return normalizeRows(out);
+}
+async function yahooMulti(interval,range){
+  const raw=ASSETS[activeAsset].yahoo,sym=encodeURIComponent(raw),hosts=['query1.finance.yahoo.com','query2.finance.yahoo.com'];
+  let last;
+  for(const host of hosts){
+    const u=`https://${host}/v8/finance/chart/${sym}?range=${range}&interval=${interval}&includePrePost=false&events=div%2Csplits`;
+    try{const rows=yahooRows(await getProviderJSON(u));if(rows.length)return rows}catch(e){last=e}
+  }
+  for(const host of hosts){
+    const u=`https://${host}/v7/finance/spark?symbols=${sym}&range=${range}&interval=${interval}&includePrePost=false`;
+    try{const rows=yahooSparkRows(await getProviderJSON(u),raw);if(rows.length)return rows}catch(e){last=e}
+  }
+  throw last||Error('Yahoo Finance indisponible');
+}
+function aggregateMarket4h(data){
+  const byDay=new Map();
+  for(const r of data){const d=new Date(r.ms),k=d.toISOString().slice(0,10);if(!byDay.has(k))byDay.set(k,[]);byDay.get(k).push(r)}
+  const out=[];
+  for(const day of byDay.values()){
+    day.sort((a,b)=>a.ms-b.ms);
+    for(let i=0;i<day.length;i+=4){const g=day.slice(i,i+4);if(!g.length)continue;out.push({ms:g[0].ms,open:g[0].open,high:Math.max(...g.map(x=>x.high)),low:Math.min(...g.map(x=>x.low)),close:g.at(-1).close,volume:g.reduce((a,x)=>a+(x.volume||0),0)})}
+  }
+  return normalizeRows(out);
+}
+async function yahoo1h(){
+  let last;
+  for(const range of ['1mo','3mo','6mo','1y']){
+    try{const rows=await yahooMulti('60m',range);if(rows.length>=20)return rows}catch(e){last=e}
+  }
+  throw last||Error('Yahoo 1H : aucune donnée exploitable');
+}
+
+async function yahooHourly(){
+  return aggregateMarket4h(await yahoo1h());
+}
+async function yahooDaily(){
+  let last;
+  for(const range of ['1y','5y','10y']){
+    try{const rows=await yahooMulti('1d',range);if(rows.length>=20)return rows}catch(e){last=e}
+  }
+  throw last||Error('Yahoo 1D : aucune donnée exploitable');
+}
+
+function stooqSymbol(){return activeAsset==='SP500'?'^spx':(activeAsset.toLowerCase()+'.us')}
+async function getProviderText(url){
+  let last,errors=[];
+  const candidates=[
+    {name:'direct',url},
+    {name:'isomorphic-git',url:'https://cors.isomorphic-git.org/'+url},
+    {name:'allorigins',url:'https://api.allorigins.win/raw?url='+encodeURIComponent(url)},
+    {name:'codetabs',url:'https://api.codetabs.com/v1/proxy/?quest='+encodeURIComponent(url)},
+    {name:'corsproxy.io',url:'https://corsproxy.io/?'+encodeURIComponent(url)}
+  ];
+  for(const c of candidates){
+    const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),15000);
+    try{const r=await fetch(c.url,{signal:ctrl.signal,cache:'no-store',mode:'cors'});if(!r.ok)throw Error('HTTP '+r.status);const txt=await r.text();if(txt&&txt.length>20)return txt;throw Error('réponse vide')}catch(e){last=e;errors.push(c.name+': '+(e.message||e))}finally{clearTimeout(timer)}
+  }
+  throw Error(errors.join(' | ')||last?.message||'Source texte indisponible');
+}
+async function stooqDaily(){
+  const s=stooqSymbol(),u=`https://stooq.com/q/d/l/?s=${encodeURIComponent(s)}&i=d`;
+  const txt=await getProviderText(u),lines=txt.trim().split(/\r?\n/);if(lines.length<3)throw Error('Stooq : réponse invalide');
+  const out=[];
+  for(let i=1;i<lines.length;i++){const p=lines[i].split(',');if(p.length<5)continue;const ms=Date.parse(p[0]+'T00:00:00Z'),open=+p[1],high=+p[2],low=+p[3],close=+p[4],volume=+(p[5]||0);if(Number.isFinite(ms)&&[open,high,low,close].every(Number.isFinite)&&close>0)out.push({ms,open,high,low,close,volume})}
+  const rows=normalizeRows(out);if(rows.length<20)throw Error('Stooq : pas assez de données');return rows;
+}
+
+async function coinbase1h(){
   const end=Date.now(),start=end-370*DAY,out=[];
   const span=280*3600000;
   for(let cur=start;cur<end;cur+=span){
@@ -123,8 +233,9 @@ async function coinbaseHourly(){
   }
   const rows=normalizeRows([...new Map(out.map(r=>[r.ms,r])).values()]);
   if(rows.length<100)throw Error('Coinbase 1H invalide');
-  return aggregate4hFrom1h(rows).slice(-2300);
+  return rows.slice(-9000);
 }
+async function coinbaseHourly(){return aggregate4hFrom1h(await coinbase1h()).slice(-2300);}
 async function coinbaseDaily(){
   const end=Date.now(),start=end-2150*DAY,out=[];
   const span=280*DAY;
@@ -138,8 +249,58 @@ async function coinbaseDaily(){
   if(rows.length<400)throw Error('Coinbase journalier invalide');
   return rows;
 }
+async function githubMarketData(kind){
+  if(ASSETS[activeAsset].kind!=='market')throw Error('Actif non boursier');
+  const file=`data/${activeAsset}_${kind}.json`;
+  const c=new AbortController(),t=setTimeout(()=>c.abort(),12000);
+  try{
+    const r=await fetch(`${file}?_=${Date.now()}`,{signal:c.signal,cache:'no-store'});
+    if(!r.ok)throw Error(`HTTP ${r.status}`);
+    const j=await r.json();
+    const a=Array.isArray(j)?j:j.rows;
+    const rows=normalizeRows((a||[]).map(r=>({ms:+r.ms,open:+r.open,high:+r.high,low:+r.low,close:+r.close,volume:+(r.volume||0)})));
+    if(rows.length<20)throw Error('fichier vide ou incomplet');
+    return rows;
+  }finally{clearTimeout(t)}
+}
+async function load1h(){
+  let errors=[];
+  if(ASSETS[activeAsset].kind==='market'){
+    try{const rows=(await githubMarketData('1h')).slice(-5000);cacheSave('1h',rows,`GitHub data ${activeAsset} 1H`);return {rows,source:`GitHub data ${activeAsset} 1H`}}catch(e){errors.push('GitHub data: '+e.message)}
+    try{const rows=(await yahoo1h()).slice(-5000);cacheSave('1h',rows,`Yahoo Finance ${activeAsset} 1H`);return {rows,source:`Yahoo Finance ${activeAsset} 1H`}}catch(e){errors.push('Yahoo Finance: '+e.message)}
+    const cached=cacheLoad('1h');if(cached)return cached;
+    throw Error(errors.join(' · '));
+  }
+  try{const rows=await coinbase1h();cacheSave('1h',rows,`Coinbase ${activeAsset} 1H`);return {rows,source:`Coinbase ${activeAsset} 1H`}}catch(e){errors.push('Coinbase: '+e.message)}
+  try{
+    const j=await getProviderJSON(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${ASSETS[activeAsset].fsym}&tsym=USD&limit=2000&aggregate=1&e=CCCAGG`),a=j?.Data?.Data;
+    if(!Array.isArray(a)||a.length<20)throw Error('réponse invalide');
+    const rows=normalizeRows(a.map(r=>({ms:+r.time*1000,open:+r.open,high:+r.high,low:+r.low,close:+r.close,volume:+(r.volumefrom||0)})));
+    cacheSave('1h',rows,`CryptoCompare ${activeAsset} 1H`);return {rows,source:`CryptoCompare ${activeAsset} 1H`};
+  }catch(e){errors.push('CryptoCompare: '+e.message)}
+  try{
+    let out=[],endTime=Date.now();
+    for(let batch=0;batch<4;batch++){
+      const j=await getProviderJSON(`https://api.binance.com/api/v3/klines?symbol=${ASSETS[activeAsset].binance}&interval=1h&limit=1000&endTime=${endTime}`);
+      if(!Array.isArray(j)||!j.length)break;
+      out.push(...j.map(r=>({ms:+r[0],open:+r[1],high:+r[2],low:+r[3],close:+r[4],volume:+r[5]})));
+      endTime=+j[0][0]-1;if(j.length<1000)break;
+    }
+    const rows=normalizeRows([...new Map(out.map(r=>[r.ms,r])).values()]).slice(-5000);
+    if(rows.length<20)throw Error('réponse invalide');
+    cacheSave('1h',rows,`Binance ${ASSETS[activeAsset].binance} 1H`);return {rows,source:`Binance ${ASSETS[activeAsset].binance} 1H`};
+  }catch(e){errors.push('Binance: '+e.message)}
+  const cached=cacheLoad('1h');if(cached)return cached;
+  throw Error(errors.join(' · '));
+}
 async function load4h(){
   let errors=[];
+  if(ASSETS[activeAsset].kind==='market'){
+    try{const one=await githubMarketData('1h'),rows=aggregateMarket4h(one);cacheSave('4h',rows,`GitHub data ${activeAsset} 1H → 4H`);return {rows,source:`GitHub data ${activeAsset} 1H → 4H`}}catch(e){errors.push('GitHub data: '+e.message)}
+    try{const rows=await yahooHourly();cacheSave('4h',rows,`Yahoo Finance ${activeAsset} 1H → 4H`);return {rows,source:`Yahoo Finance ${activeAsset} 1H → 4H`}}catch(e){errors.push('Yahoo Finance: '+e.message)}
+    const cached=cacheLoad('4h');if(cached)return cached;
+    throw Error(errors.join(' · '));
+  }
   try{const rows=await coinbaseHourly();cacheSave('4h',rows,`Coinbase ${activeAsset} 1H → 4H`);return {rows,source:`Coinbase ${activeAsset} 1H → 4H`}}catch(e){errors.push('Coinbase: '+e.message)}
   try{
     const j=await getProviderJSON(`https://min-api.cryptocompare.com/data/v2/histohour?fsym=${ASSETS[activeAsset].fsym}&tsym=USD&limit=2000&aggregate=4&e=CCCAGG`),a=j?.Data?.Data;
@@ -165,6 +326,13 @@ async function load4h(){
 }
 async function loadDaily(){
   let errors=[];
+  if(ASSETS[activeAsset].kind==='market'){
+    try{const rows=await githubMarketData('1d');cacheSave('daily',rows,`GitHub data ${activeAsset} 1D`);return {rows,source:`GitHub data ${activeAsset} 1D`}}catch(e){errors.push('GitHub data: '+e.message)}
+    try{const rows=await yahooDaily();cacheSave('daily',rows,`Yahoo Finance ${activeAsset} 1D`);return {rows,source:`Yahoo Finance ${activeAsset} 1D`}}catch(e){errors.push('Yahoo Finance: '+e.message)}
+    try{const rows=await stooqDaily();cacheSave('daily',rows,`Stooq ${activeAsset} 1D`);return {rows,source:`Stooq ${activeAsset} 1D`}}catch(e){errors.push('Stooq: '+e.message)}
+    const cached=cacheLoad('daily');if(cached)return cached;
+    throw Error(errors.join(' · '));
+  }
   try{const rows=await coinbaseDaily();cacheSave('daily',rows,`Coinbase ${activeAsset} 1D`);return {rows,source:`Coinbase ${activeAsset} 1D`}}catch(e){errors.push('Coinbase: '+e.message)}
   try{
     const j=await getProviderJSON(`https://min-api.cryptocompare.com/data/v2/histoday?fsym=${ASSETS[activeAsset].fsym}&tsym=USD&limit=2000&e=CCCAGG`),a=j?.Data?.Data;
@@ -196,8 +364,8 @@ function fibLevelsForZone(rows,seg){const zr=rows.filter(r=>r.ms>=seg.start&&r.m
 function mood(data,rr,c,disabledChanges){const bullTh=c.rsi[1],bearTh=c.rsi[2],rmap=new Map(rr.map(r=>[r.i,r.v])),disabled=disabledChanges instanceof Set?disabledChanges:new Set(),candidates=[];for(let i=1;i<data.length;i++){const rv=rmap.get(i),prev=rmap.get(i-1);if(!Number.isFinite(rv)||!Number.isFinite(prev))continue;if(prev<=bullTh&&rv>bullTh)candidates.push({ms:data[i].ms,type:'BULL',i,rsi:rv});if(prev>=bearTh&&rv<bearTh)candidates.push({ms:data[i].ms,type:'BEAR',i,rsi:rv})}candidates.sort((a,b)=>a.ms-b.ms);let baseZone='BEAR',baseStart=data[0].ms,baseSegments=[],baseChanges=[];for(const ev of candidates){if(ev.type===baseZone)continue;baseSegments.push({zone:baseZone,start:baseStart,end:ev.ms});baseZone=ev.type;baseStart=ev.ms;baseChanges.push(ev)}baseSegments.push({zone:baseZone,start:baseStart,end:data.at(-1).ms});if(!disabled.size)return {zone:baseZone,segments:baseSegments,changes:baseChanges,candidates};const segments=[];const changes=[];for(let i=0;i<baseSegments.length;i++){const seg={...baseSegments[i]};if(!segments.length){segments.push(seg);continue}if(disabled.has(seg.start)){segments[segments.length-1].end=seg.end;continue}const prevSeg=segments[segments.length-1];if(prevSeg.zone===seg.zone){prevSeg.end=seg.end;continue}segments.push(seg);const ev=baseChanges.find(ch=>ch.ms===seg.start);if(ev)changes.push(ev)}return {zone:segments.at(-1)?.zone||baseZone,segments,changes,candidates,baseSegments,baseChanges}}
 function ensureState(tf){if(!state[tf])state[tf]={};if(!state[tf].display)state[tf].display={current:true,previous:true,last2:false,last1:true};if(!(state[tf].manualFibZones instanceof Set))state[tf].manualFibZones=new Set(state[tf].manualFibZones||[]);if(!(state[tf].disabledChanges instanceof Set))state[tf].disabledChanges=new Set(state[tf].disabledChanges||[]);if(!(state[tf].targets instanceof Set))state[tf].targets=new Set(state[tf].targets||[]);return state[tf]}
 function syncFibControls(tf){const st=ensureState(tf);document.querySelectorAll(`[data-tf="${tf}"]`).forEach(inp=>{if(inp.dataset.zoneFilter==='last2')inp.checked=!!st.display.last2; if(inp.dataset.zoneFilter==='last1')inp.checked=!!st.display.last1;});}
-function futureExtension(tf,rows){const last=rows.at(-1)?.ms||Date.now(),prev=rows.at(-2)?.ms||last-DAY,step=Math.max(1,last-prev);const bars=tf==='4h'?60:tf==='1d'?60:tf==='1w'?26:12;return step*bars}
-function defaultTimeView(tf,rows){const fullMin=rows[0].ms,dataMax=rows.at(-1).ms,fullMax=dataMax+futureExtension(tf,rows);if(tf==='4h'){if(MOBILE_LAYOUT){const step=Math.max(1,dataMax-(rows.at(-2)?.ms??dataMax-4*3600000)),startRow=rows[Math.max(0,rows.length-10)],x0=startRow?.ms??Math.max(fullMin,dataMax-9*step),x1=Math.min(fullMax,dataMax+step);return {x0,x1}}const x0=Math.max(fullMin,dataMax-120*DAY);return {x0,x1:fullMax}}return {x0:fullMin,x1:fullMax}}
+function futureExtension(tf,rows){const last=rows.at(-1)?.ms||Date.now(),prev=rows.at(-2)?.ms||last-DAY,step=Math.max(1,last-prev);const bars=tf==='1h'?120:tf==='4h'?60:tf==='1d'?60:tf==='1w'?26:12;return step*bars}
+function defaultTimeView(tf,rows){const fullMin=rows[0].ms,dataMax=rows.at(-1).ms,fullMax=dataMax+futureExtension(tf,rows);if(tf==='1h'||tf==='4h'){if(MOBILE_LAYOUT){const fallback=tf==='1h'?3600000:4*3600000,step=Math.max(1,dataMax-(rows.at(-2)?.ms??dataMax-fallback)),startRow=rows[Math.max(0,rows.length-20)],x0=startRow?.ms??Math.max(fullMin,dataMax-19*step),x1=Math.min(fullMax,dataMax+step);return {x0,x1}}const x0=Math.max(fullMin,dataMax-(tf==='1h'?30:120)*DAY);return {x0,x1:fullMax}}return {x0:fullMin,x1:fullMax}}
 function getView(tf,rows,autoP0,autoP1){
   const fullMin=rows[0].ms,dataMax=rows.at(-1).ms,fullMax=dataMax+futureExtension(tf,rows);
   ensureState(tf);
@@ -226,7 +394,7 @@ function draw(tf){
   let vw=getView(tf,rows,baseMin-basePad,baseMax+basePad),minMs=vw.x0,maxMs=vw.x1;
   const visible=rows.filter(r=>r.ms>=minMs&&r.ms<=maxMs);
   let p0=vw.p0,p1=vw.p1;
-  if(MOBILE_LAYOUT&&tf==='4h'&&!Number.isFinite(state[tf].view?.p0)&&visible.length){const lo=Math.min(...visible.map(r=>r.low)),hi=Math.max(...visible.map(r=>r.high)),pad=Math.max((hi-lo)*0.14,hi*0.006);p0=lo-pad;p1=hi+pad}
+  if(MOBILE_LAYOUT&&(tf==='1h'||tf==='4h')&&!Number.isFinite(state[tf].view?.p0)&&visible.length){const lo=Math.min(...visible.map(r=>r.low)),hi=Math.max(...visible.map(r=>r.high)),pad=Math.max((hi-lo)*0.14,hi*0.006);p0=lo-pad;p1=hi+pad}
   const x=ms=>L+(ms-minMs)/(maxMs-minMs)*(W-L-R),y=v=>T+(p1-v)/(p1-p0)*(priceB-T),yr=v=>rsiT+(110-v)/110*(rsiB-rsiT);
   svg.append(el('rect',{x:0,y:0,width:W,height:H,fill:'#a9d9aa'}));
   for(let i=0;i<=6;i++){const p=p0+i*(p1-p0)/6,yy=y(p);svg.append(el('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'#8bb98d','stroke-width':.7,opacity:.6}));const t=el('text',{x:W-R+8,y:yy+4,fill:'#426b46','font-size':12});t.textContent=Math.round(p).toLocaleString('fr-FR');svg.append(t)}
@@ -243,7 +411,7 @@ function draw(tf){
     const crossX=old?x(Math.max(minMs,Math.min(maxMs,z.seg.end))):x1;
     z.levels.forEach(q=>{const yy=y(q.v);if(yy<T-20||yy>priceB+20)return;const isHundred=q.p==='100,00%';const baseLineX2=(old&&isHundred)?Math.max(x1,crossX):x1;const targetId=`${z.id}|${q.p}|${Number(q.v).toFixed(2)}`,isTarget=state[tf].targets.has(targetId),lineX2=isTarget?W-R:baseLineX2;const stroke=isTarget?'#e46f00':(manual?'#0b6fa4':(old?'#7a4fd1':'#111'));svg.append(el('line',{x1:x0,x2:lineX2,y1:yy,y2:yy,stroke,'stroke-width':isTarget?2.6:(manual?1.7:(old?1.2:1.15)),'stroke-dasharray':isTarget?null:(manual?'2 4':(old?'4 6':null)),opacity:old&&!isTarget?.9:1,'pointer-events':'none'}));const t=el('text',{x:labelX,y:yy-5,'text-anchor':'end',fill:stroke,'font-size':old?10:11,'font-weight':isTarget?900:(manual?800:(old?700:600)),'pointer-events':'none'});t.textContent=`${q.p} (${Math.round(q.v).toLocaleString('fr-FR')})${isTarget?' · TARGET':''}`;svg.append(t);if(isTarget){const tag=el('text',{x:W-R-8,y:yy-6,'text-anchor':'end',fill:'#e46f00','font-size':11,'font-weight':900,'pointer-events':'none'});tag.textContent='TARGET '+Math.round(q.v).toLocaleString('fr-FR');svg.append(tag)}if(q.n&&!old){const n=el('text',{x:x0+(Math.min(x1,lineX2)-x0)*.46,y:yy+4,fill:'#111','font-size':11,'font-weight':700,'pointer-events':'none'});n.textContent=q.n;svg.append(n)}const hit=el('line',{x1:x0,x2:Math.max(baseLineX2,x1),y1:yy,y2:yy,stroke:'transparent','stroke-width':14,'data-action':'toggle-target','data-target-id':targetId,'data-target-value':String(q.v),style:'cursor:pointer'});svg.append(hit)});
   });
-  const cw=MOBILE_LAYOUT&&tf==='4h'?Math.max(7,Math.min(26,(W-L-R)/Math.max(1,visible.length)*.58)):Math.max(2,Math.min(tf==='1m'?14:tf==='1w'?8:5,(W-L-R)/Math.max(1,visible.length)*.65));
+  const cw=MOBILE_LAYOUT&&(tf==='1h'||tf==='4h')?Math.max(7,Math.min(26,(W-L-R)/Math.max(1,visible.length)*.58)):Math.max(2,Math.min(tf==='1m'?14:tf==='1w'?8:5,(W-L-R)/Math.max(1,visible.length)*.65));
   visible.forEach(r=>{const xx=x(r.ms),up=r.close>=r.open,col=up?'#00a99d':'#ef554a',top=y(Math.max(r.open,r.close)),bot=y(Math.min(r.open,r.close));if(xx<L-10||xx>W-R+10)return;svg.append(el('line',{x1:xx,x2:xx,y1:y(r.high),y2:y(r.low),stroke:col,'stroke-width':MOBILE_LAYOUT?1.7:1}));svg.append(el('rect',{x:xx-cw/2,y:top,width:cw,height:Math.max(MOBILE_LAYOUT?2.5:1.5,bot-top),fill:col}))});
   svg.append(el('line',{x1:0,x2:W,y1:rsiT-12,y2:rsiT-12,stroke:'#547f58'}));
   const rr=rrAll,mi=miAll;
@@ -256,6 +424,7 @@ function draw(tf){
   const dateEvents=baseMood.changes;
   dateEvents.forEach(ev=>{const ms=ev.ms??ev.start;if(ms<minMs||ms>maxMs)return;const xx=x(ms),label=new Date(ms).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'2-digit'}),w=70,h=20;let row=0;for(let r=0;r<dateRows.length;r++){const trial=Math.max(L,Math.min(W-R-w,xx-w/2));if(trial>=rowRight[r]+4){row=r;break}if(r===dateRows.length-1)row=r;}const x0=Math.max(L,Math.min(W-R-w,xx-w/2)),y0=dateRows[row];rowRight[row]=x0+w;const disabled=state[tf].disabledChanges.has(ms),active=mi.changes.some(ch=>ch.ms===ms),fill=(disabled||!active)?'#7f8790':((ev.type??ev.zone)==='BULL'?'#177344':'#c23b3b');svg.append(el('line',{x1:xx,x2:xx,y1:rsiB,y2:y0,stroke:fill,'stroke-width':1,opacity:.8}));svg.append(el('rect',{x:x0,y:y0,width:w,height:h,rx:3,fill,opacity:.96,'data-action':'toggle-change','data-ms':String(ms),style:'cursor:pointer'}));const t=el('text',{x:x0+w/2,y:y0+14,'text-anchor':'middle',fill:'#fff','font-size':10.5,'font-weight':800,'pointer-events':'none'});t.textContent=label;svg.append(t)});
   c.rsi.forEach((v,i)=>{const yy=yr(v),col=i===0?'#2c6e35':i===3?'#d92f2f':'#365a3b';svg.append(el('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:col,'stroke-width':1}));const t=el('text',{x:W-R+8,y:yy+4,fill:col,'font-size':12,'font-weight':700});t.textContent=v.toFixed(2).replace('.',',');svg.append(t)});
+  if(Number.isFinite(c.midRsi)){const yy=yr(c.midRsi),col='#5c6b61';svg.append(el('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:col,'stroke-width':1,'stroke-dasharray':'3 4',opacity:.85}));const t=el('text',{x:W-R+8,y:yy+4,fill:col,'font-size':12,'font-weight':700});t.textContent=c.midRsi.toFixed(2).replace('.',',');svg.append(t)}
   let d='';rr.filter(q=>q.ms>=minMs&&q.ms<=maxMs).forEach((q,i)=>d+=(i?'L':'M')+x(q.ms).toFixed(1)+','+yr(q.v).toFixed(1));if(d)svg.append(el('path',{d,fill:'none',stroke:'#111','stroke-width':1.5}));
   const rlast=rr.at(-1)?.v,last=rows.at(-1),currentFib=zoneFibs.at(-1)?.levels||[],sh=+(currentFib.find(q=>q.p==='38,20%')?.v??shallow(c));
   if(last&&last.ms>=minMs&&last.ms<=maxMs){const yy=y(last.close);if(yy>=T-20&&yy<=priceB+20){svg.append(el('line',{x1:L,x2:W-R+6,y1:yy,y2:yy,stroke:'#ff7b00','stroke-width':1.5,'stroke-dasharray':'8 6'}));const boxW=98,boxH=20,boxX=W-R+8;svg.append(el('rect',{x:boxX,y:yy-boxH/2,width:boxW,height:boxH,rx:4,fill:'#ff7b00'}));const txt=el('text',{x:boxX+boxW/2,y:yy+4,'text-anchor':'middle',fill:'#111','font-size':11,'font-weight':800});txt.textContent='Prix '+Math.round(last.close).toLocaleString('fr-FR');svg.append(txt)}}
@@ -273,8 +442,8 @@ function draw(tf){
   svg.onclick=e=>{const action=e.target?.dataset?.action;if(action==='toggle-change'){const ms=+e.target.dataset.ms;if(!Number.isFinite(ms))return;const set=state[tf].disabledChanges;if(set.has(ms))set.delete(ms);else set.add(ms);state[tf].manualFibZones.clear();saveUserSettings();draw(tf);return}if(action==='toggle-fib-zone'){const id=e.target.dataset.zoneId;if(!id)return;const set=state[tf].manualFibZones;if(set.has(id))set.delete(id);else set.add(id);saveUserSettings();draw(tf);return}if(action==='toggle-target'){const id=e.target.dataset.targetId;if(!id)return;const set=state[tf].targets;if(set.has(id))set.delete(id);else set.add(id);saveUserSettings();draw(tf);return}};
   svg.onpointerup=e=>{state[tf].drag=null;svg.classList.remove('dragging');try{svg.releasePointerCapture?.(e.pointerId)}catch(_){}};svg.onpointercancel=()=>{state[tf].drag=null;svg.classList.remove('dragging')};svg.onpointerleave=()=>{if(!state[tf].drag)tip.style.display='none'};svg.ondblclick=e=>{const g=geom(e);if(g.py>=rsiB||g.px>=W-R){resetView(tf)}};
 }
-async function refresh(tf,dailyCache){const st=document.getElementById('st-'+tf);st.textContent='Actualisation en cours…';try{let rows,source;if(tf==='4h'){const pack=await load4h();rows=pack.rows;source=pack.source}else{const pack=dailyCache||await loadDaily(),d=pack.rows;source=pack.source;if(tf==='1d'){rows=d.slice(-430)}else if(tf==='1w'){rows=aggregate(d,'1w').slice(-280);source+=' → agrégé semaine'}else{rows=aggregate(d,'1m').slice(-70);source+=' → agrégé mois'}}if(rows.length<20)throw Error('Pas assez de données');const oldView=state[tf]?.view||null,oldDisplay=state[tf]?.display||{last2:false,last1:true},oldDisabled=state[tf]?.disabledChanges||new Set(),oldManual=state[tf]?.manualFibZones||new Set(),oldTargets=state[tf]?.targets||new Set();state[tf]={rows,source,view:oldView,display:oldDisplay,drag:null,manualFibZones:oldManual,disabledChanges:oldDisabled,targets:oldTargets};draw(tf);const last=rows.at(-1);st.textContent+=` · source ${source}${tf==='4h'?' · historique ~'+Math.round((rows.at(-1).ms-rows[0].ms)/DAY)+' jours':''} · actualisé ${new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}`;return true}catch(e){st.textContent='Actualisation impossible : '+(e.message||e)+' · vérifiez la connexion Internet ou ouvrez le fichier depuis un serveur web.';return false}}
-async function refreshAll(){const btn=document.getElementById('refreshAll');btn.disabled=true;btn.textContent='Actualisation…';let daily=null;try{daily=await loadDaily()}catch(e){}await Promise.all(['4h','1d','1w','1m'].map(tf=>refresh(tf,daily)));btn.disabled=false;btn.textContent='↻ Actualiser les graphes'}
+async function refresh(tf,dailyCache){const st=document.getElementById('st-'+tf);st.textContent='Actualisation en cours…';try{let rows,source;if(tf==='1h'){const pack=await load1h();rows=pack.rows;source=pack.source}else if(tf==='4h'){const pack=await load4h();rows=pack.rows;source=pack.source}else{const pack=dailyCache||await loadDaily(),d=pack.rows;source=pack.source;if(tf==='1d'){rows=d.slice(-430)}else if(tf==='1w'){rows=aggregate(d,'1w').slice(-280);source+=' → agrégé semaine'}else{rows=aggregate(d,'1m').slice(-70);source+=' → agrégé mois'}}if(rows.length<20)throw Error('Pas assez de données');const oldView=state[tf]?.view||null,oldDisplay=state[tf]?.display||{last2:false,last1:true},oldDisabled=state[tf]?.disabledChanges||new Set(),oldManual=state[tf]?.manualFibZones||new Set(),oldTargets=state[tf]?.targets||new Set();state[tf]={rows,source,view:oldView,display:oldDisplay,drag:null,manualFibZones:oldManual,disabledChanges:oldDisabled,targets:oldTargets};draw(tf);const last=rows.at(-1);st.textContent+=` · source ${source}${(tf==='1h'||tf==='4h')?' · historique ~'+Math.round((rows.at(-1).ms-rows[0].ms)/DAY)+' jours':''} · actualisé ${new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}`;return true}catch(e){st.textContent='Actualisation impossible : '+(e.message||e)+' · Pour les actions, vérifie que le dossier data/ a été généré par GitHub Actions.';return false}}
+async function refreshAll(){const btn=document.getElementById('refreshAll');btn.disabled=true;btn.textContent='Actualisation…';let daily=null;try{daily=await loadDaily()}catch(e){}await Promise.all(['1h','4h','1d','1w','1m'].map(tf=>refresh(tf,daily)));btn.disabled=false;btn.textContent='↻ Actualiser les graphes'}
 function bindPanelControls(){
 document.querySelectorAll('[data-zone-filter]').forEach(inp=>{const tf=inp.dataset.tf,mode=inp.dataset.zoneFilter,st=ensureState(tf).display;inp.checked=!!st[mode]});
 document.querySelectorAll('[data-reset]').forEach(b=>b.addEventListener('click',()=>resetView(b.dataset.reset)));
@@ -289,7 +458,7 @@ function applySimulation(){simulationCutoff=parseSimulationDate(simDate.value);s
 document.getElementById('applySim').addEventListener('click',applySimulation);
 simDate.addEventListener('change',applySimulation);
 document.getElementById('simToday').addEventListener('click',()=>{simDate.value='';simulationCutoff=null;simState.textContent=simulationLabel();Object.keys(CFG).forEach(tf=>{if(state[tf])state[tf].view=null;draw(tf)});});
-document.getElementById('exportSettings').addEventListener('click',()=>{const data=JSON.stringify(serializableSettings(),null,2),blob=new Blob([data],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fiboswanny-reglages.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);const s=document.getElementById('settingsStatus');if(s)s.textContent='Réglages exportés';});
+document.getElementById('exportSettings').addEventListener('click',()=>{const data=JSON.stringify(serializableSettings(),null,2),blob=new Blob([data],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='fiboswanny-reglages.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);const s=document.getElementById('settingsStatus');if(s)s.textContent='Réglages exportés · Targets + zones neutralisées + zones Fibonacci';});
 document.getElementById('importSettings').addEventListener('click',()=>document.getElementById('settingsFile').click());
 document.getElementById('settingsFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;const s=document.getElementById('settingsStatus');try{const obj=JSON.parse(await f.text());applySettingsObject(obj);saveUserSettings();state=stateStore[activeAsset];renderPanels();for(const tf of Object.keys(CFG)){if(state[tf]?.rows)draw(tf)}if(s)s.textContent='Réglages importés';}catch(err){if(s)s.textContent='Import impossible : fichier invalide';}finally{e.target.value='';}});
 document.getElementById('refreshAll').addEventListener('click',refreshAll);renderPanels();refreshAll();
