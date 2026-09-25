@@ -2,247 +2,89 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FiboSwanny · BTC · v37</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=yes">
+<meta name="theme-color" content="#071421">
+<title>FiboSwanny v5 · BTC</title>
 <style>
-:root{--bg:#071421;--panel:#0d2133;--border:#29445d;--text:#eaf2f8;--muted:#9db2c6;--accent:#ff9818;--greenbg:#a9d9aa}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}.wrap{max-width:1600px;margin:auto;padding:20px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.btc{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent);font-weight:900;font-size:24px}.title{font-size:25px;font-weight:850}.sub{color:var(--muted);font-size:13px}.btn{border:1px solid var(--border);background:#10263b;color:var(--text);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none}.btn.primary{background:var(--accent);color:#111;border-color:var(--accent)}.simbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.simbar label{font-size:12px;font-weight:800;color:var(--muted)}.simbar input[type=date]{background:#10263b;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:9px 10px;font:inherit;color-scheme:dark}.simstate{font-size:12px;color:#ffd59b;font-weight:800}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.tab{border:1px solid var(--border);background:#10263b;color:var(--text);padding:10px 16px;border-radius:10px;font-weight:800;cursor:pointer}.tab.active{background:var(--accent);color:#111;border-color:var(--accent)}.grid{display:block}.panel{display:none}.panel.active{display:block}.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px}.head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}.kicker{display:inline-block;background:#5b2f00;color:#ffd59b;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.04em}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{background:#d6f0d5;color:#17391d;border:1px solid #78ad7b;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}.fib-controls{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}.fib-controls label{display:flex;align-items:center;gap:8px;background:#10263b;border:1px solid var(--border);border-radius:10px;padding:8px 10px;color:var(--text);font-size:12px;font-weight:700}.fib-controls input{accent-color:var(--accent)}.chartwrap{position:relative;border:1px solid #6d9d70;background:var(--greenbg);overflow:hidden;border-radius:8px}.chart{display:block;width:100%;min-height:610px;touch-action:none;cursor:grab}.chart.dragging{cursor:grabbing}.axis-help{margin:8px 0 0;color:var(--muted);font-size:12px}.tip{display:none;position:absolute;z-index:5;pointer-events:none;min-width:235px;background:#effbef;color:#142b17;border:1px solid #527a56;border-radius:8px;padding:10px;font-size:12px;line-height:1.45;box-shadow:0 8px 28px #1b3d1f33}.status{margin-top:9px;color:#b9ccdb;font-size:12px}.legend{margin-top:10px;font-size:12px;color:#b9ccdb}.thresholds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}.threshold{background:#122a40;border:1px solid var(--border);border-radius:10px;padding:10px}.threshold b{display:block;font-size:12px;color:#fff}.threshold span{font-size:12px;color:var(--muted)}@media(max-width:760px){.wrap{padding:10px}.thresholds{grid-template-columns:1fr 1fr}.chart{min-height:470px}.title{font-size:20px}}
+:root{--bg:#071421;--panel:#0d2133;--border:#29445d;--text:#eaf2f8;--muted:#9db2c6;--accent:#ff9818;--greenbg:#a9d9aa;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;overscroll-behavior:none}
+body{min-height:100vh}
+.wrap{max-width:1600px;margin:auto;padding:20px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;gap:12px;align-items:center}.btc{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent);font-weight:900;font-size:24px}.title{font-size:25px;font-weight:850}.sub{color:var(--muted);font-size:13px}
+.btn{border:1px solid var(--border);background:#10263b;color:var(--text);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;touch-action:manipulation}.btn.primary{background:var(--accent);color:#111;border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:1fr;gap:18px}.panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:16px}.head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}.kicker{display:inline-block;background:#5b2f00;color:#ffd59b;padding:7px 10px;border-radius:999px;font-size:11px;font-weight:900;letter-spacing:.04em}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{background:#d6f0d5;color:#17391d;border:1px solid #78ad7b;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}.chartwrap{position:relative;border:1px solid #6d9d70;background:var(--greenbg);overflow:hidden;border-radius:8px;touch-action:pan-x pan-y pinch-zoom}.chart{display:block;width:100%;min-height:610px;user-select:none;-webkit-user-select:none}.tip{display:none;position:absolute;z-index:5;pointer-events:none;min-width:235px;background:#effbef;color:#142b17;border:1px solid #527a56;border-radius:8px;padding:10px;font-size:12px;line-height:1.45;box-shadow:0 8px 28px #1b3d1f33}.status{margin-top:9px;color:#b9ccdb;font-size:12px}.legend{margin-top:10px;font-size:12px;color:#b9ccdb}.thresholds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}.threshold{background:#122a40;border:1px solid var(--border);border-radius:10px;padding:10px}.threshold b{display:block;font-size:12px;color:#fff}.threshold span{font-size:12px;color:var(--muted)}
+.mobile-toolbar{display:none;gap:7px;margin:8px 0 10px;position:sticky;top:0;z-index:20;padding:8px 0;background:linear-gradient(var(--panel) 82%,transparent)}
+.mobile-toolbar .btn{flex:1;padding:10px 8px;font-size:12px}.mobile-toolbar .btn.active{background:var(--accent);color:#111;border-color:var(--accent)}
+.mobile-only{display:none}.desktop-actions{display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:760px){
+  body{padding-top:var(--safe-top);padding-bottom:var(--safe-bottom)}
+  .wrap{padding:8px 6px 10px;max-width:none}
+  .top{margin-bottom:8px;padding:0 2px;align-items:flex-start}
+  .brand{gap:8px}.btc{width:34px;height:34px;font-size:20px}.title{font-size:19px;line-height:1.1}.sub{font-size:11px;line-height:1.25}
+  .desktop-actions{display:none}.mobile-only{display:block}.mobile-toolbar{display:flex}
+  .grid{gap:8px}.panel{padding:8px;border-radius:12px}.panel:not(#panel-4h){display:none}
+  #panel-4h .head{display:none}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:4px 0 8px}.chip{padding:7px 8px;font-size:11px;border-radius:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #ct-4h{display:none}
+  .chartwrap{border-radius:10px;overflow:hidden}
+  .chart{min-height:0;height:68vh;max-height:760px}
+  .tip{min-width:180px;max-width:78vw;font-size:11px;padding:8px}
+  .status{font-size:11px;margin:6px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .thresholds{display:none}
+}
+@media(max-width:430px){.chart{height:66vh}.chips{grid-template-columns:1fr 1fr}.chip{font-size:10.5px}}
+@media(orientation:landscape) and (max-width:1000px){.chart{height:72vh}.top{display:none}.mobile-toolbar{top:var(--safe-top)}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div class="brand"><div class="btc">₿</div><div><div class="title">FiboSwanny · BTC · v37</div><div class="sub">4 onglets · Fibonacci + Mood RSI · 100% ancré au changement de zone · 0% sur l’extrême de zone</div></div></div>
-    <div class="simbar"><label for="simDate">Retour dans le temps</label><input id="simDate" type="date"><button class="btn" id="applySim">Afficher à cette date</button><button class="btn" id="simToday">Aujourd’hui</button><span class="simstate" id="simState">Mode actuel</span><button class="btn primary" id="refreshAll">↻ Actualiser les graphes</button><a class="btn" href="https://fr.tradingview.com/chart/LaSKuG13/" target="_blank" rel="noopener">TradingView ↗</a></div>
+    <div class="brand"><div class="btc">₿</div><div><div class="title">FiboSwanny v5 · BTC</div><div class="sub">iPhone : ouverture directe BTC 4H · vue 15 jours</div></div></div>
+    <div class="desktop-actions"><button class="btn primary" id="refreshAll">↻ Actualiser les 4 graphes</button><a class="btn" href="https://fr.tradingview.com/chart/LaSKuG13/" target="_blank" rel="noopener">TradingView ↗</a></div>
   </div>
-  <div class="tabs" id="tabs"><button class="tab" data-tab="4h">4H</button><button class="tab active" data-tab="1d">1D</button><button class="tab" data-tab="1w">1W</button><button class="tab" data-tab="1m">1M</button></div><div id="graphs" class="grid"></div>
+  <div class="mobile-toolbar" id="mobileToolbar">
+    <button class="btn active" data-range="15">15 j</button>
+    <button class="btn" data-range="30">30 j</button>
+    <button class="btn" data-range="all">Tout</button>
+    <button class="btn" id="mobileRefresh">↻</button>
+  </div>
+  <div id="graphs" class="grid"></div>
 </div>
 <script>
 (()=>{
 const NS='http://www.w3.org/2000/svg',DAY=86400000;
+const isMobile=()=>window.matchMedia('(max-width:760px)').matches || /iPhone|iPod/i.test(navigator.userAgent);
 const CFG={
-'4h':{label:'4H',market:'BTC / Dollar · 4H',rsi:[85.43,63.05,40.35,22.86],levels:[{p:'target',v:93819.49,target:true},{p:'1,272',v:98968.99,target:true},{p:'1,414',v:101657.33,target:true},{p:'0,00%',v:87397},{p:'38,20%',v:83706,n:'shallow fib'},{p:'61,80%',v:81425.75},{p:'100,00%',v:77734.78},{p:'127,20%',v:75106.66},{p:'141,40%',v:73734.62},{p:'200,00%',v:68072.56},{p:'300,00%',v:58410.34}],primaryTarget:93819.49},
-'1d':{label:'1D',market:'BTC / Dollar · 1D',rsi:[80.61,57.64,39.40,24.83],levels:[{p:'2,000',v:109179.28,target:true},{p:'1,414',v:99322.42,target:true},{p:'1,272',v:96939.90,target:true},{p:'1,000',v:92365.70,target:true},{p:'0,00%',v:87397},{p:'38,20%',v:78882.14,n:'shallow fib'},{p:'61,80%',v:73621.65},{p:'100,00%',v:65106.79},{p:'127,20%',v:59043.85},{p:'141,40%',v:55878.64},{p:'200,00%',v:42816.58}],primaryTarget:92365.70},
+'4h':{label:'4H',market:'BTC / Dollar · 4H · Coinbase',rsi:[85.43,63.05,40.35,22.86],levels:[{p:'target',v:93819.49,target:true},{p:'1,272',v:98968.99,target:true},{p:'1,414',v:101657.33,target:true},{p:'0,00%',v:87397},{p:'38,20%',v:83706,n:'shallow fib'},{p:'61,80%',v:81425.75},{p:'100,00%',v:77734.78},{p:'127,20%',v:75106.66},{p:'141,40%',v:73734.62},{p:'200,00%',v:68072.56},{p:'300,00%',v:58410.34}],primaryTarget:93819.49},
+'1d':{label:'1D',market:'BTC / Dollar · 1D · Coinbase',rsi:[80.61,57.64,39.40,24.83],levels:[{p:'2,000',v:109179.28,target:true},{p:'1,414',v:99322.42,target:true},{p:'1,272',v:96939.90,target:true},{p:'1,000',v:92365.70,target:true},{p:'0,00%',v:87397},{p:'38,20%',v:78882.14,n:'shallow fib'},{p:'61,80%',v:73621.65},{p:'100,00%',v:65106.79},{p:'127,20%',v:59043.85},{p:'141,40%',v:55878.64}],primaryTarget:92365.70},
 '1w':{label:'1W',market:'BTC / Dollar · 1W · Coinbase',rsi:[82.78,58.29,40.60,23.96],levels:[{p:'target',v:113898.45,target:true},{p:'0,00%',v:87397},{p:'38,20%',v:80453.07,n:'shallow fib'},{p:'61,80%',v:76163.11},{p:'100,00%',v:69219.18},{p:'141,40%',v:61693.56},{p:'200,00%',v:51041.36}],primaryTarget:113898.45},
-'1m':{label:'1M',market:'BTC / Dollar · 1M · INDEX',rsi:[96.95,61.95,42.69,19.02],levels:[{p:'0,00%',v:58051.07},{p:'38,20%',v:73278.36,n:'shallow fib'},{p:'61,80%',v:82685.79},{p:'100,00%',v:97913.08},{p:'127,20%',v:108755.55},{p:'141,40%',v:114415.95},{p:'200,00%',v:137775.09}],primaryTarget:null}
+'1m':{label:'1M',market:'BTC / Dollar · 1M · INDEX',rsi:[96.95,61.95,42.69,19.02],levels:[{p:'0,00%',v:58051.07},{p:'38,20%',v:73278.36,n:'shallow fib'},{p:'61,80%',v:82685.79},{p:'100,00%',v:97913.08},{p:'127,20%',v:108755.55},{p:'141,40%',v:114415.95}],primaryTarget:null}
 };
-const state={};
-let simulationCutoff=null;
-function parseSimulationDate(v){if(!v)return null;const m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v);if(!m)return null;return Date.UTC(+m[1],+m[2]-1,+m[3],23,59,59,999)}
-function simulationRows(tf){const all=state[tf]?.rows||[];return simulationCutoff==null?all:all.filter(r=>r.ms<=simulationCutoff)}
-function simulationLabel(){return simulationCutoff==null?'Mode actuel':'Simulation au '+new Date(simulationCutoff).toLocaleDateString('fr-FR')}
-
+const state={}; let mobileRange=15;
 function money(v){return Number.isFinite(+v)?Math.round(+v).toLocaleString('fr-FR')+' $':'—'}
 function el(n,a={}){const z=document.createElementNS(NS,n);Object.entries(a).forEach(([k,v])=>v!=null&&z.setAttribute(k,v));return z}
-function panel(tf,c){return `<section class="panel" id="panel-${tf}"><div class="head"><div><span class="kicker">FIBOSWANNY · ${c.label} · v37</span><h2 style="margin:10px 0 4px">${c.market}</h2><div class="sub">Fibonacci : 100% au changement · 0% à l’extrême de zone + Mood RSI ${c.label}</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-reset="${tf}">⟲ Réinitialiser la vue</button><button class="btn" data-refresh="${tf}">↻ Actualiser</button></div></div><div class="chips"><span class="chip" id="sh-${tf}">Shallow Fib : —</span><span class="chip" id="zn-${tf}">Zone : —</span><span class="chip" id="rs-${tf}">RSI 13 : —</span><span class="chip" id="tg-${tf}">Target : —</span><span class="chip" id="px-${tf}">Prix actuel : —</span></div><div class="fib-controls"><label><input type="checkbox" data-zone-filter="last1" data-tf="${tf}" checked> Limiter au 1 dernier changement de zone</label><label><input type="checkbox" data-zone-filter="last2" data-tf="${tf}"> Limiter aux 2 derniers changements de zone</label></div><div class="chartwrap"><svg class="chart" id="svg-${tf}" viewBox="0 0 1500 860"></svg><div class="tip" id="tip-${tf}"></div></div><div class="axis-help">Maintenir le clic dans le graphe : déplacer gauche/droite et haut/bas · axe du bas : temps uniquement · axe de droite : prix uniquement · molette : zoom · double-clic : réinitialiser · dates colorées = changements de zone · axe du temps prolongé + historique 4H étendu à ~1 an · clic-glisser dans le graphe = déplacement 2D · clic zone RSI = ajouter/retirer Fibonacci · clic ligne Fibonacci = ajouter/retirer Target · clic barre = neutraliser/réactiver toute la zone · date de simulation = aucune donnée future utilisée</div><div class="status" id="st-${tf}">Chargement…</div><div class="thresholds"><div class="threshold"><b>Max Bull</b><span>${c.rsi[0].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Seuil Bull</b><span>${c.rsi[1].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Seuil Bear</b><span>${c.rsi[2].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Min Bear</b><span>${c.rsi[3].toFixed(2).replace('.',',')}</span></div></div></section>`}
+function panel(tf,c){return `<section class="panel" id="panel-${tf}"><div class="head"><div><span class="kicker">FIBOSWANNY · ${c.label}</span><h2 style="margin:10px 0 4px">${c.market}</h2><div class="sub">Fibonacci de référence + Mood RSI ${c.label}</div></div><button class="btn" data-refresh="${tf}">↻ Actualiser</button></div><div class="chips"><span class="chip" id="sh-${tf}">Shallow Fib : —</span><span class="chip" id="ct-${tf}">Clôtures &gt; Shallow : — / 3</span><span class="chip" id="zn-${tf}">Zone : —</span><span class="chip" id="rs-${tf}">RSI 13 : —</span><span class="chip" id="tg-${tf}">Target : —</span></div><div class="chartwrap"><svg class="chart" id="svg-${tf}" viewBox="0 0 1500 800" preserveAspectRatio="none"></svg><div class="tip" id="tip-${tf}"></div></div><div class="status" id="st-${tf}">Chargement…</div><div class="thresholds"><div class="threshold"><b>Max Bull</b><span>${c.rsi[0].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Seuil Bull</b><span>${c.rsi[1].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Seuil Bear</b><span>${c.rsi[2].toFixed(2).replace('.',',')}</span></div><div class="threshold"><b>Min Bear</b><span>${c.rsi[3].toFixed(2).replace('.',',')}</span></div></div></section>`}
 document.getElementById('graphs').innerHTML=Object.entries(CFG).map(([tf,c])=>panel(tf,c)).join('');
-const tabs=document.querySelectorAll('[data-tab]');
-function showTab(tf){tabs.forEach(b=>b.classList.toggle('active',b.dataset.tab===tf));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+tf));}
-tabs.forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
-showTab('1d');
-async function getJSON(url){
-  const c=new AbortController(),t=setTimeout(()=>c.abort(),15000);
-  try{
-    const sep=url.includes('?')?'&':'?',fresh=url+sep+'_='+Date.now();
-    const r=await fetch(fresh,{signal:c.signal,cache:'no-store',mode:'cors',headers:{'Accept':'application/json'}});
-    if(!r.ok)throw Error('HTTP '+r.status);
-    return await r.json();
-  }finally{clearTimeout(t)}
-}
-async function getProviderJSON(url){
-  let last;
-  const urls=[
-    url,
-    'https://corsproxy.io/?'+encodeURIComponent(url),
-    'https://api.allorigins.win/raw?url='+encodeURIComponent(url)
-  ];
-  for(const u of urls){
-    try{return await getJSON(u)}catch(e){last=e}
-  }
-  throw last||Error('Source indisponible');
-}
-function normalizeRows(a){return a.filter(r=>r&&Number.isFinite(+r.close)&&+r.close>0).sort((x,y)=>x.ms-y.ms)}
-function cacheSave(key,rows,source){try{localStorage.setItem('fiboswanny_v37_'+key,JSON.stringify({saved:Date.now(),source,rows:rows.slice(-2600)}))}catch(e){}}
-function cacheLoad(key){try{const x=JSON.parse(localStorage.getItem('fiboswanny_v37_'+key)||'null');if(x&&Array.isArray(x.rows)&&x.rows.length>=20)return {rows:normalizeRows(x.rows),source:(x.source||'cache local')+' · cache local'}}catch(e){}return null}
-function aggregate4hFrom1h(data){
-  const m=new Map();
-  for(const r of data){
-    const d=new Date(r.ms),h=Math.floor(d.getUTCHours()/4)*4,key=Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate(),h);
-    let q=m.get(key);
-    if(!q){q={ms:key,open:r.open,high:r.high,low:r.low,close:r.close,volume:r.volume||0};m.set(key,q)}
-    else{q.high=Math.max(q.high,r.high);q.low=Math.min(q.low,r.low);q.close=r.close;q.volume+=(r.volume||0)}
-  }
-  return [...m.values()].sort((a,b)=>a.ms-b.ms)
-}
-async function coinbaseHourly(){
-  const end=Date.now(),start=end-370*DAY,out=[];
-  const span=280*3600000;
-  for(let cur=start;cur<end;cur+=span){
-    const ce=Math.min(end,cur+span);
-    const u=`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=3600&start=${encodeURIComponent(new Date(cur).toISOString())}&end=${encodeURIComponent(new Date(ce).toISOString())}`;
-    const j=await getProviderJSON(u);
-    if(Array.isArray(j))out.push(...j.map(r=>({ms:+r[0]*1000,low:+r[1],high:+r[2],open:+r[3],close:+r[4],volume:+r[5]})));
-  }
-  const rows=normalizeRows([...new Map(out.map(r=>[r.ms,r])).values()]);
-  if(rows.length<100)throw Error('Coinbase 1H invalide');
-  return aggregate4hFrom1h(rows).slice(-2300);
-}
-async function coinbaseDaily(){
-  const end=Date.now(),start=end-2150*DAY,out=[];
-  const span=280*DAY;
-  for(let cur=start;cur<end;cur+=span){
-    const ce=Math.min(end,cur+span);
-    const u=`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=86400&start=${encodeURIComponent(new Date(cur).toISOString())}&end=${encodeURIComponent(new Date(ce).toISOString())}`;
-    const j=await getProviderJSON(u);
-    if(Array.isArray(j))out.push(...j.map(r=>({ms:+r[0]*1000,low:+r[1],high:+r[2],open:+r[3],close:+r[4],volume:+r[5]})));
-  }
-  const rows=normalizeRows([...new Map(out.map(r=>[r.ms,r])).values()]);
-  if(rows.length<400)throw Error('Coinbase journalier invalide');
-  return rows;
-}
-async function load4h(){
-  let errors=[];
-  try{const rows=await coinbaseHourly();cacheSave('4h',rows,'Coinbase 1H → 4H');return {rows,source:'Coinbase 1H → 4H'}}catch(e){errors.push('Coinbase: '+e.message)}
-  try{
-    const j=await getProviderJSON('https://min-api.cryptocompare.com/data/v2/histohour?fsym=BTC&tsym=USD&limit=2000&aggregate=4&e=CCCAGG'),a=j?.Data?.Data;
-    if(!Array.isArray(a)||a.length<20)throw Error('réponse invalide');
-    const rows=normalizeRows(a.map(r=>({ms:+r.time*1000,open:+r.open,high:+r.high,low:+r.low,close:+r.close,volume:+(r.volumefrom||0)})));
-    cacheSave('4h',rows,'CryptoCompare 4H');return {rows,source:'CryptoCompare 4H'};
-  }catch(e){errors.push('CryptoCompare: '+e.message)}
-  try{
-    let out=[],endTime=Date.now();
-    for(let batch=0;batch<3;batch++){
-      const j=await getProviderJSON(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=4h&limit=1000&endTime=${endTime}`);
-      if(!Array.isArray(j)||!j.length)break;
-      out.push(...j.map(r=>({ms:+r[0],open:+r[1],high:+r[2],low:+r[3],close:+r[4],volume:+r[5]})));
-      endTime=+j[0][0]-1;
-      if(j.length<1000)break;
-    }
-    const rows=normalizeRows([...new Map(out.map(r=>[r.ms,r])).values()]).slice(-2300);
-    if(rows.length<20)throw Error('réponse invalide');
-    cacheSave('4h',rows,'Binance BTCUSDT 4H');return {rows,source:'Binance BTCUSDT 4H'};
-  }catch(e){errors.push('Binance: '+e.message)}
-  const cached=cacheLoad('4h');if(cached)return cached;
-  throw Error(errors.join(' · '));
-}
-async function loadDaily(){
-  let errors=[];
-  try{const rows=await coinbaseDaily();cacheSave('daily',rows,'Coinbase 1D');return {rows,source:'Coinbase 1D'}}catch(e){errors.push('Coinbase: '+e.message)}
-  try{
-    const j=await getProviderJSON('https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=2000&e=CCCAGG'),a=j?.Data?.Data;
-    if(!Array.isArray(a)||a.length<400)throw Error('réponse invalide');
-    const rows=normalizeRows(a.map(r=>({ms:+r.time*1000,open:+r.open,high:+r.high,low:+r.low,close:+r.close,volume:+(r.volumefrom||0)})));
-    cacheSave('daily',rows,'CryptoCompare 1D');return {rows,source:'CryptoCompare 1D'};
-  }catch(e){errors.push('CryptoCompare: '+e.message)}
-  try{
-    let end=Date.now(),out=[];
-    for(let n=0;n<3;n++){
-      const j=await getProviderJSON(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1d&limit=1000&endTime=${end}`);
-      if(!Array.isArray(j)||!j.length)break;
-      out.push(...j.map(r=>({ms:+r[0],open:+r[1],high:+r[2],low:+r[3],close:+r[4],volume:+r[5]})));
-      end=+j[0][0]-1;
-    }
-    const rows=normalizeRows([...new Map(out.map(r=>[r.ms,r])).values()]);
-    if(rows.length<400)throw Error('réponse invalide');
-    cacheSave('daily',rows,'Binance BTCUSDT 1D');return {rows,source:'Binance BTCUSDT 1D'};
-  }catch(e){errors.push('Binance: '+e.message)}
-  const cached=cacheLoad('daily');if(cached)return cached;
-  throw Error(errors.join(' · '));
-}
+async function getJSON(url){const c=new AbortController(),t=setTimeout(()=>c.abort(),12000);try{const r=await fetch(url,{signal:c.signal,cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);return await r.json()}finally{clearTimeout(t)}}
+async function tryUrls(url){let last;for(const u of [url,'https://api.allorigins.win/raw?url='+encodeURIComponent(url),'https://corsproxy.io/?'+encodeURIComponent(url)]){try{return await getJSON(u)}catch(e){last=e}}throw last||Error('Source indisponible')}
+async function load4h(){const end=Date.now(),start=end-120*DAY,out=[];for(let cur=start;cur<end;cur+=240*4*3600000){const ce=Math.min(end,cur+240*4*3600000),u=`https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=14400&start=${encodeURIComponent(new Date(cur).toISOString())}&end=${encodeURIComponent(new Date(ce).toISOString())}`,j=await tryUrls(u);if(Array.isArray(j))out.push(...j.map(r=>({ms:+r[0]*1000,low:+r[1],high:+r[2],open:+r[3],close:+r[4],volume:+r[5]})))}return [...new Map(out.filter(r=>r.close>0).map(r=>[r.ms,r])).values()].sort((a,b)=>a.ms-b.ms)}
+async function loadDaily(){const j=await tryUrls('https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=2000&e=CCCAGG'),a=j?.Data?.Data;if(!Array.isArray(a))throw Error('Historique journalier indisponible');return a.map(r=>({ms:+r.time*1000,open:+r.open,high:+r.high,low:+r.low,close:+r.close,volume:+(r.volumefrom||0)})).filter(r=>r.close>0)}
 function aggregate(data,mode){const m=new Map();for(const r of data){const d=new Date(r.ms);let key;if(mode==='1w'){const day=(d.getUTCDay()+6)%7,dt=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()-day));key=dt.toISOString().slice(0,10)}else key=`${d.getUTCFullYear()}-${String(d.getUTCMonth()+1).padStart(2,'0')}`;let q=m.get(key);if(!q){q={ms:r.ms,open:r.open,high:r.high,low:r.low,close:r.close,volume:r.volume||0};m.set(key,q)}else{q.high=Math.max(q.high,r.high);q.low=Math.min(q.low,r.low);q.close=r.close;q.ms=r.ms;q.volume+=(r.volume||0)}}return [...m.values()].sort((a,b)=>a.ms-b.ms)}
 function rsiWilder(data,n=13){if(data.length<=n)return [];let gains=0,losses=0,out=[];for(let i=1;i<=n;i++){const d=data[i].close-data[i-1].close;d>=0?gains+=d:losses-=d}let ag=gains/n,al=losses/n;const val=()=>al===0?100:100-100/(1+ag/al);out.push({ms:data[n].ms,v:val(),i:n});for(let i=n+1;i<data.length;i++){const d=data[i].close-data[i-1].close,g=d>0?d:0,l=d<0?-d:0;ag=(ag*(n-1)+g)/n;al=(al*(n-1)+l)/n;out.push({ms:data[i].ms,v:val(),i})}return out}
 function shallow(c){return +c.levels.find(q=>q.p==='38,20%')?.v}
-function previousFibLevels(c,zone){const zero=+c.levels.find(q=>q.p==='0,00%')?.v,hundred=+c.levels.find(q=>q.p==='100,00%')?.v;if(!Number.isFinite(zero)||!Number.isFinite(hundred))return [];const range=Math.abs(zero-hundred);if((zone||'').toUpperCase()==='BULL'){return [{p:'Anc 38,20%',v:zero+range*0.382,previous:true},{p:'Anc 61,80%',v:zero+range*0.618,previous:true},{p:'Anc 100,00%',v:zero+range,previous:true}]}return [{p:'Anc 38,20%',v:hundred-range*0.382,previous:true},{p:'Anc 61,80%',v:hundred-range*0.618,previous:true},{p:'Anc 100,00%',v:hundred-range,previous:true}]}
-function zoneChangeAnchor(seg,changeCandle){const bull=seg.zone==='BULL';return bull?changeCandle.low:changeCandle.high}
-function fibLevelsForZone(rows,seg){const zr=rows.filter(r=>r.ms>=seg.start&&r.ms<=seg.end);if(!zr.length)return [];const bull=seg.zone==='BULL',change=zr[0],hundred=zoneChangeAnchor(seg,change),zero=bull?Math.max(...zr.map(r=>r.high)):Math.min(...zr.map(r=>r.low)),span=hundred-zero;const ratios=[['0,00%',0],['38,20%',.382],['61,80%',.618],['100,00%',1],['127,20%',1.272],['141,40%',1.414],['200,00%',2]];return ratios.map(([p,r])=>({p,v:zero+span*r,n:p==='38,20%'?'shallow fib':null,zone:seg.zone}));}
-function mood(data,rr,c,disabledChanges){const bullTh=c.rsi[1],bearTh=c.rsi[2],rmap=new Map(rr.map(r=>[r.i,r.v])),disabled=disabledChanges instanceof Set?disabledChanges:new Set(),candidates=[];for(let i=1;i<data.length;i++){const rv=rmap.get(i),prev=rmap.get(i-1);if(!Number.isFinite(rv)||!Number.isFinite(prev))continue;if(prev<=bullTh&&rv>bullTh)candidates.push({ms:data[i].ms,type:'BULL',i,rsi:rv});if(prev>=bearTh&&rv<bearTh)candidates.push({ms:data[i].ms,type:'BEAR',i,rsi:rv})}candidates.sort((a,b)=>a.ms-b.ms);let baseZone='BEAR',baseStart=data[0].ms,baseSegments=[],baseChanges=[];for(const ev of candidates){if(ev.type===baseZone)continue;baseSegments.push({zone:baseZone,start:baseStart,end:ev.ms});baseZone=ev.type;baseStart=ev.ms;baseChanges.push(ev)}baseSegments.push({zone:baseZone,start:baseStart,end:data.at(-1).ms});if(!disabled.size)return {zone:baseZone,segments:baseSegments,changes:baseChanges,candidates};const segments=[];const changes=[];for(let i=0;i<baseSegments.length;i++){const seg={...baseSegments[i]};if(!segments.length){segments.push(seg);continue}if(disabled.has(seg.start)){segments[segments.length-1].end=seg.end;continue}const prevSeg=segments[segments.length-1];if(prevSeg.zone===seg.zone){prevSeg.end=seg.end;continue}segments.push(seg);const ev=baseChanges.find(ch=>ch.ms===seg.start);if(ev)changes.push(ev)}return {zone:segments.at(-1)?.zone||baseZone,segments,changes,candidates,baseSegments,baseChanges}}
-function ensureState(tf){if(!state[tf])state[tf]={};if(!state[tf].display)state[tf].display={current:true,previous:true,last2:false,last1:true};if(!(state[tf].manualFibZones instanceof Set))state[tf].manualFibZones=new Set(state[tf].manualFibZones||[]);if(!(state[tf].disabledChanges instanceof Set))state[tf].disabledChanges=new Set(state[tf].disabledChanges||[]);if(!(state[tf].targets instanceof Set))state[tf].targets=new Set(state[tf].targets||[]);return state[tf]}
-function syncFibControls(tf){const st=ensureState(tf);document.querySelectorAll(`[data-tf="${tf}"]`).forEach(inp=>{if(inp.dataset.zoneFilter==='last2')inp.checked=!!st.display.last2; if(inp.dataset.zoneFilter==='last1')inp.checked=!!st.display.last1;});}
-function futureExtension(tf,rows){const last=rows.at(-1)?.ms||Date.now(),prev=rows.at(-2)?.ms||last-DAY,step=Math.max(1,last-prev);const bars=tf==='4h'?60:tf==='1d'?60:tf==='1w'?26:12;return step*bars}
-function defaultTimeView(tf,rows){const fullMin=rows[0].ms,dataMax=rows.at(-1).ms,fullMax=dataMax+futureExtension(tf,rows);if(tf==='4h'){const x0=Math.max(fullMin,dataMax-120*DAY);return {x0,x1:fullMax}}return {x0:fullMin,x1:fullMax}}
-function getView(tf,rows,autoP0,autoP1){
-  const fullMin=rows[0].ms,dataMax=rows.at(-1).ms,fullMax=dataMax+futureExtension(tf,rows);
-  ensureState(tf);
-  let v=state[tf]?.view;
-  if(!v){const d=defaultTimeView(tf,rows);v={x0:d.x0,x1:d.x1,p0:null,p1:null};state[tf].view=v}
-  if(!Number.isFinite(v.x0)||!Number.isFinite(v.x1)||v.x1<=v.x0){const d=defaultTimeView(tf,rows);v.x0=d.x0;v.x1=d.x1}
-  const fullSpan=Math.max(1,fullMax-fullMin),minSpan=Math.max(6*3600000,fullSpan/500);
-  let span=Math.max(minSpan,Math.min(fullSpan*1.25,v.x1-v.x0));
-  if(v.x0<fullMin){v.x0=fullMin;v.x1=fullMin+span}
-  if(v.x1>fullMax){v.x1=fullMax;v.x0=fullMax-span}
-  v.x0=Math.max(fullMin,v.x0);v.x1=Math.min(fullMax,v.x1);
-  const p0=Number.isFinite(v.p0)?v.p0:autoP0,p1=Number.isFinite(v.p1)?v.p1:autoP1;
-  return {v,fullMin,fullMax,x0:v.x0,x1:v.x1,p0,p1};
-}
-function resetView(tf){if(state[tf]){const rows=simulationRows(tf);if(rows.length){const d=defaultTimeView(tf,rows);state[tf].view={x0:d.x0,x1:d.x1,p0:null,p1:null}}else state[tf].view=null;draw(tf)}}
-function draw(tf){
-  ensureState(tf);
-  syncFibControls(tf);
-  const c=CFG[tf],rawRows=state[tf]?.rows||[],rows=simulationRows(tf),svg=document.getElementById('svg-'+tf),tip=document.getElementById('tip-'+tf);
-  if(!rows.length){svg.replaceChildren();document.getElementById('st-'+tf).textContent=simulationCutoff==null?'Aucune donnée disponible.':'Aucune donnée disponible à cette date dans l’historique chargé.';return}
-  svg.replaceChildren();
-  const W=1500,H=860,L=62,R=110,T=20,priceB=555,rsiT=585,rsiB=770;
-  const rrAll=rsiWilder(rows,13),baseMood=mood(rows,rrAll,c,null),miAll=mood(rows,rrAll,c,state[tf].disabledChanges),allZoneFibs=miAll.segments.map((seg,i)=>({idx:i,id:String(seg.start),seg,levels:fibLevelsForZone(rows,seg),current:i===miAll.segments.length-1})),limitLast1=!!state[tf].display.last1,limitLast2=!!state[tf].display.last2,filteredZoneFibs=(limitLast1?allZoneFibs.slice(-2):(limitLast2?allZoneFibs.slice(-3):allZoneFibs)),manualIds=state[tf].manualFibZones,zoneFibs=[...filteredZoneFibs,...allZoneFibs.filter(z=>manualIds.has(z.id)&&!filteredZoneFibs.some(f=>f.id===z.id))],allLevels=zoneFibs.flatMap(z=>z.levels.map(q=>q.v)),baseMin=Math.min(...rows.map(r=>r.low),...(allLevels.length?allLevels:rows.map(r=>r.low))),baseMax=Math.max(...rows.map(r=>r.high),...(allLevels.length?allLevels:rows.map(r=>r.high))),basePad=(baseMax-baseMin)*.05||1000;
-  const vw=getView(tf,rows,baseMin-basePad,baseMax+basePad),minMs=vw.x0,maxMs=vw.x1,p0=vw.p0,p1=vw.p1;
-  const x=ms=>L+(ms-minMs)/(maxMs-minMs)*(W-L-R),y=v=>T+(p1-v)/(p1-p0)*(priceB-T),yr=v=>rsiT+(110-v)/110*(rsiB-rsiT);
-  const visible=rows.filter(r=>r.ms>=minMs&&r.ms<=maxMs);
-  svg.append(el('rect',{x:0,y:0,width:W,height:H,fill:'#a9d9aa'}));
-  for(let i=0;i<=6;i++){const p=p0+i*(p1-p0)/6,yy=y(p);svg.append(el('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'#8bb98d','stroke-width':.7,opacity:.6}));const t=el('text',{x:W-R+8,y:yy+4,fill:'#426b46','font-size':12});t.textContent=Math.round(p).toLocaleString('fr-FR');svg.append(t)}
-  const sx=L+(W-L-R)*.57;
-  const currentSeg=miAll.segments.at(-1),showCurrent=state[tf].display.current!==false,showPrevious=state[tf].display.previous!==false;
-  zoneFibs.forEach(z=>{
-    const isCurrent=z.current;
-    if((isCurrent&&!showCurrent)||(!isCurrent&&!showPrevious))return;
-    const old=!isCurrent,manual=state[tf].manualFibZones.has(z.id);
-    const a=Math.max(minMs,z.seg.start),b=Math.min(maxMs,z.seg.end);if(b<a)return;
-    const segSpan=Math.max(1,b-a);
-    const drawA=old?(a+segSpan*0.10):a,drawB=old?(a+segSpan*0.78):b;
-    const x0=x(drawA),x1=x(drawB),labelX=Math.min(W-R-6,Math.max(x1-6,x0+40));
-    const crossX=old?x(Math.max(minMs,Math.min(maxMs,z.seg.end))):x1;
-    z.levels.forEach(q=>{const yy=y(q.v);if(yy<T-20||yy>priceB+20)return;const isHundred=q.p==='100,00%';const baseLineX2=(old&&isHundred)?Math.max(x1,crossX):x1;const targetId=`${z.id}|${q.p}|${Number(q.v).toFixed(2)}`,isTarget=state[tf].targets.has(targetId),lineX2=isTarget?W-R:baseLineX2;const stroke=isTarget?'#e46f00':(manual?'#0b6fa4':(old?'#7a4fd1':'#111'));svg.append(el('line',{x1:x0,x2:lineX2,y1:yy,y2:yy,stroke,'stroke-width':isTarget?2.6:(manual?1.7:(old?1.2:1.15)),'stroke-dasharray':isTarget?null:(manual?'2 4':(old?'4 6':null)),opacity:old&&!isTarget?.9:1,'pointer-events':'none'}));const t=el('text',{x:labelX,y:yy-5,'text-anchor':'end',fill:stroke,'font-size':old?10:11,'font-weight':isTarget?900:(manual?800:(old?700:600)),'pointer-events':'none'});t.textContent=`${q.p} (${Math.round(q.v).toLocaleString('fr-FR')})${isTarget?' · TARGET':''}`;svg.append(t);if(isTarget){const tag=el('text',{x:W-R-8,y:yy-6,'text-anchor':'end',fill:'#e46f00','font-size':11,'font-weight':900,'pointer-events':'none'});tag.textContent='TARGET '+Math.round(q.v).toLocaleString('fr-FR');svg.append(tag)}if(q.n&&!old){const n=el('text',{x:x0+(Math.min(x1,lineX2)-x0)*.46,y:yy+4,fill:'#111','font-size':11,'font-weight':700,'pointer-events':'none'});n.textContent=q.n;svg.append(n)}const hit=el('line',{x1:x0,x2:Math.max(baseLineX2,x1),y1:yy,y2:yy,stroke:'transparent','stroke-width':14,'data-action':'toggle-target','data-target-id':targetId,'data-target-value':String(q.v),style:'cursor:pointer'});svg.append(hit)});
-  });
-  const cw=Math.max(2,Math.min(tf==='1m'?14:tf==='1w'?8:5,(W-L-R)/Math.max(1,visible.length)*.65));
-  visible.forEach(r=>{const xx=x(r.ms),up=r.close>=r.open,col=up?'#00a99d':'#ef554a',top=y(Math.max(r.open,r.close)),bot=y(Math.min(r.open,r.close));if(xx<L-10||xx>W-R+10)return;svg.append(el('line',{x1:xx,x2:xx,y1:y(r.high),y2:y(r.low),stroke:col,'stroke-width':1}));svg.append(el('rect',{x:xx-cw/2,y:top,width:cw,height:Math.max(1.5,bot-top),fill:col}))});
-  svg.append(el('line',{x1:0,x2:W,y1:rsiT-12,y2:rsiT-12,stroke:'#547f58'}));
-  const rr=rrAll,mi=miAll;
-  const zoneSegments=mi.segments;
-  const rsiAt=ms=>{let best=rr[0];for(const q of rr){if(!best||Math.abs(q.ms-ms)<Math.abs(best.ms-ms))best=q}return best&&Number.isFinite(best.v)?best.v:null};
-  zoneSegments.forEach((seg,idx)=>{const a=Math.max(seg.start,minMs),b=Math.min(seg.end,maxMs);if(b<=a)return;const x0=x(a),x1=x(b),isCurrent=idx===zoneSegments.length-1,endRsi=rsiAt(seg.end);let topV,bottomV;if(seg.zone==='BULL'){topV=c.rsi[0];bottomV=isCurrent?c.rsi[2]:(Number.isFinite(endRsi)?Math.max(c.rsi[2],Math.min(c.rsi[0],endRsi)):c.rsi[2]);}else{topV=isCurrent?c.rsi[1]:(Number.isFinite(endRsi)?Math.max(c.rsi[2],Math.min(c.rsi[0],endRsi)):c.rsi[1]);bottomV=c.rsi[3];}const yTop=yr(Math.max(topV,bottomV)),yBottom=yr(Math.min(topV,bottomV));svg.append(el('rect',{x:x0,y:yTop,width:Math.max(1,x1-x0),height:Math.max(1,yBottom-yTop),fill:seg.zone==='BULL'?'#55b96a':'#b88972',opacity:.34}))});
-  zoneSegments.forEach(seg=>{const a=Math.max(seg.start,minMs),b=Math.min(seg.end,maxMs);if(b<=a)return;const x0=x(a),x1=x(b),id=String(seg.start),selected=state[tf].manualFibZones.has(id);if(selected)svg.append(el('rect',{x:x0,y:rsiT,width:Math.max(1,x1-x0),height:rsiB-rsiT,fill:'none',stroke:'#0b6fa4','stroke-width':2,'stroke-dasharray':'5 4'}));const hit=el('rect',{x:x0,y:rsiT,width:Math.max(1,x1-x0),height:rsiB-rsiT,fill:'transparent','data-action':'toggle-fib-zone','data-zone-id':id,style:'cursor:pointer'});svg.append(hit)});
-  baseMood.changes.forEach(ev=>{if(ev.ms<minMs||ev.ms>maxMs)return;const xx=x(ev.ms),disabled=state[tf].disabledChanges.has(ev.ms),active=mi.changes.some(ch=>ch.ms===ev.ms),suppressed=!active,stroke=(disabled||suppressed)?'#7f8790':'#143246';svg.append(el('line',{x1:xx,x2:xx,y1:T,y2:rsiB,stroke,'stroke-width':disabled?2:1.25,'stroke-dasharray':(disabled||suppressed)?'3 5':'6 6',opacity:disabled?.95:(active?.95:.5)}));const hit=el('rect',{x:xx-7,y:T,width:14,height:rsiB-T,fill:'transparent','data-action':'toggle-change','data-ms':String(ev.ms),style:'cursor:pointer'});svg.append(hit)});
-  const dateRows=[778,804,830],rowRight=[-1e9,-1e9,-1e9];
-  const dateEvents=baseMood.changes;
-  dateEvents.forEach(ev=>{const ms=ev.ms??ev.start;if(ms<minMs||ms>maxMs)return;const xx=x(ms),label=new Date(ms).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit',year:'2-digit'}),w=70,h=20;let row=0;for(let r=0;r<dateRows.length;r++){const trial=Math.max(L,Math.min(W-R-w,xx-w/2));if(trial>=rowRight[r]+4){row=r;break}if(r===dateRows.length-1)row=r;}const x0=Math.max(L,Math.min(W-R-w,xx-w/2)),y0=dateRows[row];rowRight[row]=x0+w;const disabled=state[tf].disabledChanges.has(ms),active=mi.changes.some(ch=>ch.ms===ms),fill=(disabled||!active)?'#7f8790':((ev.type??ev.zone)==='BULL'?'#177344':'#c23b3b');svg.append(el('line',{x1:xx,x2:xx,y1:rsiB,y2:y0,stroke:fill,'stroke-width':1,opacity:.8}));svg.append(el('rect',{x:x0,y:y0,width:w,height:h,rx:3,fill,opacity:.96,'data-action':'toggle-change','data-ms':String(ms),style:'cursor:pointer'}));const t=el('text',{x:x0+w/2,y:y0+14,'text-anchor':'middle',fill:'#fff','font-size':10.5,'font-weight':800,'pointer-events':'none'});t.textContent=label;svg.append(t)});
-  c.rsi.forEach((v,i)=>{const yy=yr(v),col=i===0?'#2c6e35':i===3?'#d92f2f':'#365a3b';svg.append(el('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:col,'stroke-width':1}));const t=el('text',{x:W-R+8,y:yy+4,fill:col,'font-size':12,'font-weight':700});t.textContent=v.toFixed(2).replace('.',',');svg.append(t)});
-  let d='';rr.filter(q=>q.ms>=minMs&&q.ms<=maxMs).forEach((q,i)=>d+=(i?'L':'M')+x(q.ms).toFixed(1)+','+yr(q.v).toFixed(1));if(d)svg.append(el('path',{d,fill:'none',stroke:'#111','stroke-width':1.5}));
-  const rlast=rr.at(-1)?.v,last=rows.at(-1),currentFib=zoneFibs.at(-1)?.levels||[],sh=+(currentFib.find(q=>q.p==='38,20%')?.v??shallow(c));
-  if(last&&last.ms>=minMs&&last.ms<=maxMs){const yy=y(last.close);if(yy>=T-20&&yy<=priceB+20){svg.append(el('line',{x1:L,x2:W-R+6,y1:yy,y2:yy,stroke:'#ff7b00','stroke-width':1.5,'stroke-dasharray':'8 6'}));const boxW=98,boxH=20,boxX=W-R+8;svg.append(el('rect',{x:boxX,y:yy-boxH/2,width:boxW,height:boxH,rx:4,fill:'#ff7b00'}));const txt=el('text',{x:boxX+boxW/2,y:yy+4,'text-anchor':'middle',fill:'#111','font-size':11,'font-weight':800});txt.textContent='Prix '+Math.round(last.close).toLocaleString('fr-FR');svg.append(txt)}}
-  const activeTargetValues=[];zoneFibs.forEach(z=>z.levels.forEach(q=>{const id=`${z.id}|${q.p}|${Number(q.v).toFixed(2)}`;if(state[tf].targets.has(id))activeTargetValues.push(q.v)}));document.getElementById('sh-'+tf).textContent='Shallow Fib : '+money(sh);document.getElementById('zn-'+tf).textContent='Zone : '+mi.zone;document.getElementById('rs-'+tf).textContent='RSI 13 : '+(Number.isFinite(rlast)?rlast.toFixed(2).replace('.',','):'—');document.getElementById('tg-'+tf).textContent='Target : '+(activeTargetValues.length?activeTargetValues.map(money).join(' · '):money(c.primaryTarget));document.getElementById('px-'+tf).textContent=(simulationCutoff==null?'Prix actuel : ':'Prix simulé : ')+money(last.close);
-  document.getElementById('st-'+tf).textContent=`${rows.length}${simulationCutoff==null?'':' / '+rawRows.length} bougies ${c.label} · vue ${visible.length} bougies · dernière donnée utilisée ${new Date(last.ms).toLocaleString('fr-FR')} · clôture ${money(last.close)} · ${mi.zone} ZONE${simulationCutoff==null?'':' · '+simulationLabel()}`;
-  [0,.25,.5,.75,1].forEach(f=>{const ms=minMs+(maxMs-minMs)*f,t=el('text',{x:L+f*(W-L-R),y:rsiB-6,'text-anchor':'middle',fill:'#365a3b','font-size':11});t.textContent=new Date(ms).toLocaleDateString('fr-FR',tf==='1m'?{month:'short',year:'2-digit'}:{day:'2-digit',month:'short',year:'2-digit'});svg.append(t)});
-  // zones d'axes interactives (transparentes)
-  svg.append(el('rect',{x:L,y:rsiB,width:W-L-R,height:H-rsiB,fill:'transparent','data-axis':'x',style:'cursor:ew-resize'}));
-  svg.append(el('rect',{x:W-R,y:T,width:R,height:priceB-T,fill:'transparent','data-axis':'y',style:'cursor:ns-resize'}));
-  const geom=e=>{const b=svg.getBoundingClientRect();return {b,px:(e.clientX-b.left)/b.width*W,py:(e.clientY-b.top)/b.height*H}};
-  svg.onwheel=e=>{const g=geom(e),v=state[tf].view;if(g.px>=W-R&&g.py>=T&&g.py<=priceB){e.preventDefault();const factor=e.deltaY>0?1.18:.84,span=p1-p0,anchor=p1-(g.py-T)/(priceB-T)*span,newSpan=Math.max(100,span*factor),ratio=(anchor-p0)/span;v.p0=anchor-ratio*newSpan;v.p1=v.p0+newSpan;draw(tf)}else if(g.px>=L&&g.px<=W-R&&g.py>=T&&g.py<=H){e.preventDefault();const factor=e.deltaY>0?1.18:.84,span=(v.x1-v.x0),newSpan=Math.max((vw.fullMax-vw.fullMin)/500,Math.min((vw.fullMax-vw.fullMin)*1.25,span*factor)),anchor=v.x0+Math.max(0,Math.min(1,(g.px-L)/(W-L-R)))*span,ratio=(anchor-v.x0)/span;v.x0=anchor-ratio*newSpan;v.x1=v.x0+newSpan;draw(tf)}};
-  svg.onpointerdown=e=>{if(e.target?.dataset?.action){e.preventDefault();return}const g=geom(e);if(g.px>=W-R&&g.py>=T&&g.py<=priceB){state[tf].drag={axis:'y',x:e.clientX,y:e.clientY,x0:state[tf].view.x0,x1:state[tf].view.x1,p0,p1,pointerId:e.pointerId};svg.classList.add('dragging');svg.setPointerCapture?.(e.pointerId);e.preventDefault()}else if(g.py>=rsiB&&g.px>=L&&g.px<=W-R){state[tf].drag={axis:'x',x:e.clientX,y:e.clientY,x0:state[tf].view.x0,x1:state[tf].view.x1,p0,p1,pointerId:e.pointerId};svg.classList.add('dragging');svg.setPointerCapture?.(e.pointerId);e.preventDefault()}else if(g.px>=L&&g.px<=W-R&&g.py>=T&&g.py<=priceB){state[tf].drag={axis:'xy',x:e.clientX,y:e.clientY,x0:state[tf].view.x0,x1:state[tf].view.x1,p0,p1,pointerId:e.pointerId};svg.classList.add('dragging');svg.setPointerCapture?.(e.pointerId);e.preventDefault()}};
-  svg.onpointermove=e=>{const g=geom(e),drag=state[tf].drag;if(drag){e.preventDefault();const plotPx=Math.max(1,g.b.width*(W-L-R)/W),plotPy=Math.max(1,g.b.height*(priceB-T)/H),dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(drag.axis==='x'||drag.axis==='xy'){const shiftX=-dx/plotPx*(drag.x1-drag.x0);state[tf].view.x0=drag.x0+shiftX;state[tf].view.x1=drag.x1+shiftX}if(drag.axis==='y'||drag.axis==='xy'){const shiftY=dy/plotPy*(drag.p1-drag.p0);state[tf].view.p0=drag.p0+shiftY;state[tf].view.p1=drag.p1+shiftY}draw(tf);svg.classList.add('dragging');return}
-    if(g.px<L||g.px>W-R||g.py>priceB){tip.style.display='none';return}const ms=minMs+(g.px-L)/(W-L-R)*(maxMs-minMs);if(ms>rows.at(-1).ms){tip.style.display='none';return}const r=rows.reduce((best,a)=>Math.abs(a.ms-ms)<Math.abs(best.ms-ms)?a:best,rows[0]),rv=rr.reduce((best,a)=>Math.abs(a.ms-r.ms)<Math.abs(best.ms-r.ms)?a:best,rr[0]);tip.innerHTML=`<b>${new Date(r.ms).toLocaleString('fr-FR')}</b><br>O ${money(r.open)} · H ${money(r.high)}<br>L ${money(r.low)} · C <b>${money(r.close)}</b><br>RSI 13 : ${rv&&Number.isFinite(rv.v)?rv.v.toFixed(2).replace('.',','):'—'}<br>Shallow Fib : ${money(sh)}`;tip.style.display='block';tip.style.left=Math.min(g.b.width-250,Math.max(8,e.clientX-g.b.left+12))+'px';tip.style.top=Math.min(g.b.height-120,Math.max(8,e.clientY-g.b.top+12))+'px'};
-  svg.onclick=e=>{const action=e.target?.dataset?.action;if(action==='toggle-change'){const ms=+e.target.dataset.ms;if(!Number.isFinite(ms))return;const set=state[tf].disabledChanges;if(set.has(ms))set.delete(ms);else set.add(ms);state[tf].manualFibZones.clear();draw(tf);return}if(action==='toggle-fib-zone'){const id=e.target.dataset.zoneId;if(!id)return;const set=state[tf].manualFibZones;if(set.has(id))set.delete(id);else set.add(id);draw(tf);return}if(action==='toggle-target'){const id=e.target.dataset.targetId;if(!id)return;const set=state[tf].targets;if(set.has(id))set.delete(id);else set.add(id);draw(tf);return}};
-  svg.onpointerup=e=>{state[tf].drag=null;svg.classList.remove('dragging');try{svg.releasePointerCapture?.(e.pointerId)}catch(_){}};svg.onpointercancel=()=>{state[tf].drag=null;svg.classList.remove('dragging')};svg.onpointerleave=()=>{if(!state[tf].drag)tip.style.display='none'};svg.ondblclick=e=>{const g=geom(e);if(g.py>=rsiB||g.px>=W-R){resetView(tf)}};
-}
-async function refresh(tf,dailyCache){const st=document.getElementById('st-'+tf);st.textContent='Actualisation en cours…';try{let rows,source;if(tf==='4h'){const pack=await load4h();rows=pack.rows;source=pack.source}else{const pack=dailyCache||await loadDaily(),d=pack.rows;source=pack.source;if(tf==='1d'){rows=d.slice(-430)}else if(tf==='1w'){rows=aggregate(d,'1w').slice(-280);source+=' → agrégé semaine'}else{rows=aggregate(d,'1m').slice(-70);source+=' → agrégé mois'}}if(rows.length<20)throw Error('Pas assez de données');const oldView=state[tf]?.view||null,oldDisplay=state[tf]?.display||{last2:false,last1:true},oldDisabled=state[tf]?.disabledChanges||new Set(),oldManual=state[tf]?.manualFibZones||new Set(),oldTargets=state[tf]?.targets||new Set();state[tf]={rows,source,view:oldView,display:oldDisplay,drag:null,manualFibZones:oldManual,disabledChanges:oldDisabled,targets:oldTargets};draw(tf);const last=rows.at(-1);st.textContent+=` · source ${source}${tf==='4h'?' · historique ~'+Math.round((rows.at(-1).ms-rows[0].ms)/DAY)+' jours':''} · actualisé ${new Date().toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}`;return true}catch(e){st.textContent='Actualisation impossible : '+(e.message||e)+' · vérifiez la connexion Internet ou ouvrez le fichier depuis un serveur web.';return false}}
-async function refreshAll(){const btn=document.getElementById('refreshAll');btn.disabled=true;btn.textContent='Actualisation…';let daily=null;try{daily=await loadDaily()}catch(e){}await Promise.all(['4h','1d','1w','1m'].map(tf=>refresh(tf,daily)));btn.disabled=false;btn.textContent='↻ Actualiser les graphes'}
-document.querySelectorAll('[data-reset]').forEach(b=>b.addEventListener('click',()=>resetView(b.dataset.reset)));
-document.querySelectorAll('[data-refresh]').forEach(b=>b.addEventListener('click',async()=>{b.disabled=true;const old=b.textContent;b.textContent='Actualisation…';await refresh(b.dataset.refresh);b.disabled=false;b.textContent=old}));
-document.querySelectorAll('[data-zone-filter]').forEach(inp=>inp.addEventListener('change',e=>{const tf=e.target.dataset.tf,mode=e.target.dataset.zoneFilter,st=ensureState(tf).display;if(mode==='last1'){st.last1=e.target.checked;if(e.target.checked)st.last2=false;}else if(mode==='last2'){st.last2=e.target.checked;if(e.target.checked)st.last1=false;}draw(tf);}));
-const simDate=document.getElementById('simDate'),simState=document.getElementById('simState');
-simDate.max=new Date().toISOString().slice(0,10);
-function applySimulation(){simulationCutoff=parseSimulationDate(simDate.value);simState.textContent=simulationLabel();Object.keys(CFG).forEach(tf=>{if(state[tf])state[tf].view=null;draw(tf)});}
-document.getElementById('applySim').addEventListener('click',applySimulation);
-simDate.addEventListener('change',applySimulation);
-document.getElementById('simToday').addEventListener('click',()=>{simDate.value='';simulationCutoff=null;simState.textContent=simulationLabel();Object.keys(CFG).forEach(tf=>{if(state[tf])state[tf].view=null;draw(tf)});});
-document.getElementById('refreshAll').addEventListener('click',refreshAll);refreshAll();
+function mood(data,rr,c){const bullTh=c.rsi[1],bearTh=c.rsi[2],sh=shallow(c),rmap=new Map(rr.map(r=>[r.i,r.v]));let zone='BEAR',segments=[],start=data[0].ms;for(let i=1;i<data.length;i++){const rv=rmap.get(i),prev=rmap.get(i-1),three=i>=2&&data[i].close>sh&&data[i-1].close>sh&&data[i-2].close>sh;if(zone==='BEAR'&&((Number.isFinite(rv)&&Number.isFinite(prev)&&prev<=bullTh&&rv>bullTh)||three)){segments.push({zone,start,end:data[i].ms});zone='BULL';start=data[i].ms}else if(zone==='BULL'&&Number.isFinite(rv)&&Number.isFinite(prev)&&prev>=bearTh&&rv<bearTh){segments.push({zone,start,end:data[i].ms});zone='BEAR';start=data[i].ms}}segments.push({zone,start,end:data.at(-1).ms});return {zone,segments}}
+function visibleRows(tf,allRows){if(tf!=='4h'||!isMobile())return allRows;if(mobileRange==='all')return allRows;const days=Number(mobileRange)||15,cut=allRows.at(-1).ms-days*DAY;return allRows.filter(r=>r.ms>=cut)}
+function draw(tf){const c=CFG[tf],allRows=state[tf]?.rows||[],rows=visibleRows(tf,allRows),svg=document.getElementById('svg-'+tf),tip=document.getElementById('tip-'+tf);if(!rows.length)return;svg.replaceChildren();const mobile=isMobile()&&tf==='4h';const W=1500,H=800,L=mobile?34:62,R=mobile?84:110,T=mobile?8:20,priceB=mobile?570:555,rsiT=mobile?600:585,rsiB=mobile?786:770,minMs=rows[0].ms,maxMs=rows.at(-1).ms,allLevels=c.levels.map(q=>q.v),minP=Math.min(...rows.map(r=>r.low),...allLevels),maxP=Math.max(...rows.map(r=>r.high),...allLevels),pad=(maxP-minP)*(mobile?.035:.05)||1000,p0=minP-pad,p1=maxP+pad,x=ms=>L+(ms-minMs)/(maxMs-minMs)*(W-L-R),y=v=>T+(p1-v)/(p1-p0)*(priceB-T),yr=v=>rsiT+(110-v)/110*(rsiB-rsiT);svg.append(el('rect',{x:0,y:0,width:W,height:H,fill:'#a9d9aa'}));for(let i=0;i<=6;i++){const p=p0+i*(p1-p0)/6,yy=y(p);svg.append(el('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:'#8bb98d','stroke-width':.7,opacity:.6}));const t=el('text',{x:W-R+6,y:yy+4,fill:'#315936','font-size':mobile?18:12,'font-weight':mobile?700:400});t.textContent=Math.round(p).toLocaleString('fr-FR');svg.append(t)}const sx=mobile?L+(W-L-R)*.48:L+(W-L-R)*.57;c.levels.forEach(q=>{const yy=y(q.v);svg.append(el('line',{x1:sx,x2:W-R,y1:yy,y2:yy,stroke:q.target?'#243b25':'#111','stroke-width':q.target?1.6:1.15,'stroke-dasharray':q.target?'7 6':null}));const t=el('text',{x:W-R-4,y:yy-(mobile?7:5),'text-anchor':'end',fill:'#111','font-size':mobile?17:11,'font-weight':mobile?700:400});t.textContent=mobile?`${q.p} · ${Math.round(q.v/1000)}k`:`${q.p} (${Math.round(q.v).toLocaleString('fr-FR')})`;svg.append(t);if(q.n){const n=el('text',{x:sx+(W-R-sx)*.40,y:yy+(mobile?7:4),fill:'#111','font-size':mobile?17:11,'font-weight':700});n.textContent='shallow';svg.append(n)}});const cw=Math.max(mobile?7:2,Math.min(tf==='1m'?14:tf==='1w'?8:mobile?16:5,(W-L-R)/rows.length*(mobile?.56:.65)));rows.forEach(r=>{const xx=x(r.ms),up=r.close>=r.open,col=up?'#008f85':'#d84a42',top=y(Math.max(r.open,r.close)),bot=y(Math.min(r.open,r.close));svg.append(el('line',{x1:xx,x2:xx,y1:y(r.high),y2:y(r.low),stroke:col,'stroke-width':mobile?2:1}));svg.append(el('rect',{x:xx-cw/2,y:top,width:cw,height:Math.max(mobile?2.5:1.5,bot-top),fill:col}))});svg.append(el('line',{x1:0,x2:W,y1:rsiT-12,y2:rsiT-12,stroke:'#547f58'}));const rrAll=rsiWilder(allRows,13),rr=rrAll.filter(r=>r.ms>=minMs&&r.ms<=maxMs),mi=mood(allRows,rrAll,c);mi.segments.filter(seg=>seg.end>=minMs&&seg.start<=maxMs).forEach(seg=>{const x0=x(Math.max(seg.start,minMs)),x1=x(Math.min(seg.end,maxMs));svg.append(el('rect',{x:x0,y:rsiT,width:Math.max(1,x1-x0),height:rsiB-rsiT,fill:seg.zone==='BULL'?'#55b96a':'#ef6b63',opacity:mobile?.30:.25}))});c.rsi.forEach((v,i)=>{const yy=yr(v),col=i===0?'#2c6e35':i===3?'#d92f2f':'#365a3b';svg.append(el('line',{x1:L,x2:W-R,y1:yy,y2:yy,stroke:col,'stroke-width':mobile?1.4:1}));const t=el('text',{x:W-R+6,y:yy+5,fill:col,'font-size':mobile?17:12,'font-weight':700});t.textContent=v.toFixed(1).replace('.',',');svg.append(t)});let d='';rr.forEach((q,i)=>d+=(i?'L':'M')+x(q.ms).toFixed(1)+','+yr(q.v).toFixed(1));svg.append(el('path',{d,fill:'none',stroke:'#111','stroke-width':mobile?2.2:1.5}));const rlast=rrAll.at(-1)?.v,last=allRows.at(-1),sh=shallow(c),above=allRows.slice(-3).filter(r=>r.close>sh).length;document.getElementById('sh-'+tf).textContent='Shallow : '+money(sh);document.getElementById('ct-'+tf).textContent=`Clôtures > Shallow : ${above} / 3`;document.getElementById('zn-'+tf).textContent='Zone : '+mi.zone;document.getElementById('rs-'+tf).textContent='RSI 13 : '+(Number.isFinite(rlast)?rlast.toFixed(1).replace('.',','):'—');document.getElementById('tg-'+tf).textContent='Target : '+money(c.primaryTarget);document.getElementById('st-'+tf).textContent=`${rows.length} bougies visibles · ${new Date(last.ms).toLocaleString('fr-FR')} · ${money(last.close)} · ${mi.zone}`;const tickCount=mobile?3:5;for(let i=0;i<tickCount;i++){const f=i/(tickCount-1),ms=minMs+(maxMs-minMs)*f,t=el('text',{x:L+f*(W-L-R),y:H-(mobile?5:10),'text-anchor':'middle',fill:'#315936','font-size':mobile?16:11,'font-weight':mobile?700:400});t.textContent=new Date(ms).toLocaleDateString('fr-FR',mobile?{day:'2-digit',month:'2-digit'}:tf==='1m'?{month:'short',year:'2-digit'}:{day:'2-digit',month:'short',year:tf==='1w'?'2-digit':undefined});svg.append(t)}svg.onpointermove=e=>{const b=svg.getBoundingClientRect(),px=(e.clientX-b.left)/b.width*W;if(px<L||px>W-R){tip.style.display='none';return}const ms=minMs+(px-L)/(W-L-R)*(maxMs-minMs),r=rows.reduce((best,a)=>Math.abs(a.ms-ms)<Math.abs(best.ms-ms)?a:best,rows[0]),rv=rrAll.reduce((best,a)=>Math.abs(a.ms-r.ms)<Math.abs(best.ms-r.ms)?a:best,rrAll[0]);tip.innerHTML=`<b>${new Date(r.ms).toLocaleString('fr-FR')}</b><br>O ${money(r.open)} · H ${money(r.high)}<br>L ${money(r.low)} · C <b>${money(r.close)}</b><br>RSI 13 : ${rv&&Number.isFinite(rv.v)?rv.v.toFixed(2).replace('.',','):'—'}<br>Shallow : ${money(sh)}`;tip.style.display='block';tip.style.left=Math.min(b.width-190,Math.max(6,e.clientX-b.left+10))+'px';tip.style.top=Math.min(b.height-115,Math.max(6,e.clientY-b.top+10))+'px'};svg.onpointerleave=()=>tip.style.display='none'}
+async function refresh(tf,dailyCache){const st=document.getElementById('st-'+tf);st.textContent='Chargement…';try{let rows,source;if(tf==='4h'){rows=await load4h();source='Coinbase 4H'}else{const d=dailyCache||await loadDaily();if(tf==='1d'){rows=d.slice(-430);source='CryptoCompare journalier'}else if(tf==='1w'){rows=aggregate(d,'1w').slice(-280);source='agrégé semaine'}else{rows=aggregate(d,'1m').slice(-70);source='agrégé mois'}}if(rows.length<20)throw Error('Pas assez de données');state[tf]={rows,source};draw(tf)}catch(e){st.textContent='Indisponible : '+(e.message||e)}}
+async function refreshAll(){const btn=document.getElementById('refreshAll');if(btn){btn.disabled=true;btn.textContent='Chargement…'}let daily=null;try{daily=await loadDaily()}catch(e){}await Promise.all(['4h','1d','1w','1m'].map(tf=>refresh(tf,daily)));if(btn){btn.disabled=false;btn.textContent='↻ Actualiser les 4 graphes'}}
+function setRange(v){mobileRange=v==='all'?'all':Number(v);document.querySelectorAll('[data-range]').forEach(b=>b.classList.toggle('active',String(b.dataset.range)===String(v)));if(state['4h'])draw('4h')}
+document.querySelectorAll('[data-refresh]').forEach(b=>b.addEventListener('click',()=>refresh(b.dataset.refresh)));
+document.querySelectorAll('[data-range]').forEach(b=>b.addEventListener('click',()=>setRange(b.dataset.range)));
+document.getElementById('refreshAll')?.addEventListener('click',refreshAll);document.getElementById('mobileRefresh')?.addEventListener('click',()=>refresh('4h'));
+window.addEventListener('resize',()=>{for(const tf of Object.keys(state))draw(tf)});
+if(isMobile()) refresh('4h'); else refreshAll();
 })();
 </script>
 </body></html>
