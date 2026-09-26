@@ -3,7 +3,7 @@ name: Update crypto history
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 * * * *'
+    - cron: "17 * * * *"
 
 permissions:
   contents: write
@@ -12,13 +12,131 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
+
       - name: Update BTC and ETH 4H files
-        run: python scripts/update_crypto_history.py
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, time, urllib.parse, urllib.request
+          from pathlib import Path
+
+          OUT = Path('data')
+          OUT.mkdir(exist_ok=True)
+
+          TARGETS = {
+              'BTC': {'symbol': 'BTCUSDT', 'limit': 4000},
+              'ETH': {'symbol': 'ETHUSDT', 'limit': 2200},
+          }
+
+          def http_json(url, timeout=20):
+              req = urllib.request.Request(url, headers={
+                  'User-Agent': 'Mozilla/5.0 FiboSwanny GitHub Action',
+                  'Accept': 'application/json',
+              })
+              with urllib.request.urlopen(req, timeout=timeout) as r:
+                  return json.loads(r.read().decode('utf-8'))
+
+          def normalize(rows):
+              uniq = {}
+              for r in rows:
+                  try:
+                      ms = int(r['ms'])
+                      o,h,l,c = map(float, (r['open'],r['high'],r['low'],r['close']))
+                      v = float(r.get('volume',0) or 0)
+                      if ms > 0 and min(o,h,l,c) > 0:
+                          uniq[ms] = {'ms':ms,'open':o,'high':h,'low':l,'close':c,'volume':v}
+                  except Exception:
+                      pass
+              return [uniq[k] for k in sorted(uniq)]
+
+          def binance_4h(symbol, wanted):
+              rows=[]
+              end_ms=int(time.time()*1000)
+              while len(rows) < wanted:
+                  lim=min(1000, wanted-len(rows))
+                  qs=urllib.parse.urlencode({'symbol':symbol,'interval':'4h','limit':lim,'endTime':end_ms})
+                  # data-api.binance.vision is public market-data only and tends to work well on GitHub runners
+                  url='https://data-api.binance.vision/api/v3/klines?'+qs
+                  data=http_json(url)
+                  if not isinstance(data,list) or not data:
+                      break
+                  batch=[]
+                  for x in data:
+                      batch.append({'ms':int(x[0]),'open':float(x[1]),'high':float(x[2]),'low':float(x[3]),'close':float(x[4]),'volume':float(x[5])})
+                  rows = batch + rows
+                  oldest=min(r['ms'] for r in batch)
+                  end_ms=oldest-1
+                  if len(batch)<lim:
+                      break
+                  time.sleep(0.15)
+              return normalize(rows)[-wanted:]
+
+          def cryptocompare_4h(asset, wanted):
+              rows=[]
+              to_ts=int(time.time())
+              while len(rows) < wanted:
+                  lim=min(2000, wanted-len(rows))
+                  qs=urllib.parse.urlencode({'fsym':asset,'tsym':'USD','limit':lim,'aggregate':4,'toTs':to_ts,'e':'CCCAGG'})
+                  url='https://min-api.cryptocompare.com/data/v2/histohour?'+qs
+                  j=http_json(url)
+                  data=(j.get('Data') or {}).get('Data') or []
+                  if not data:
+                      break
+                  batch=[]
+                  for x in data:
+                      if float(x.get('close') or 0) <= 0:
+                          continue
+                      batch.append({'ms':int(x['time'])*1000,'open':float(x['open']),'high':float(x['high']),'low':float(x['low']),'close':float(x['close']),'volume':float(x.get('volumefrom') or 0)})
+                  if not batch:
+                      break
+                  rows = batch + rows
+                  to_ts=min(int(x['time']) for x in data)-1
+                  if len(data)<lim:
+                      break
+                  time.sleep(0.15)
+              return normalize(rows)[-wanted:]
+
+          for asset, cfg in TARGETS.items():
+              wanted=cfg['limit']
+              errors=[]
+              rows=[]
+              source=''
+              try:
+                  rows=binance_4h(cfg['symbol'], wanted)
+                  source='Binance data-api 4H'
+              except Exception as e:
+                  errors.append('Binance: '+repr(e))
+              if len(rows) < min(500,wanted):
+                  try:
+                      rows=cryptocompare_4h(asset, wanted)
+                      source='CryptoCompare 4H'
+                  except Exception as e:
+                      errors.append('CryptoCompare: '+repr(e))
+              if len(rows) < 100:
+                  raise RuntimeError(f'{asset}: historique insuffisant ({len(rows)} bougies). ' + ' | '.join(errors))
+              payload={
+                  'asset':asset,
+                  'timeframe':'4h',
+                  'source':source,
+                  'updated_at':time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+                  'rows':rows,
+              }
+              path=OUT/f'{asset}_4h.json'
+              path.write_text(json.dumps(payload,separators=(',',':')))
+              first=time.strftime('%Y-%m-%d', time.gmtime(rows[0]['ms']/1000))
+              last=time.strftime('%Y-%m-%d', time.gmtime(rows[-1]['ms']/1000))
+              print(f'{asset}: {len(rows)} bougies 4H, {first} -> {last}, source={source}')
+          PY
+
       - name: Commit market history
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -26,6 +144,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No data changes"
           else
-            git commit -m "Update BTC ETH 4H history"
+            git commit -m "Update BTC and ETH 4H history"
             git push
           fi
